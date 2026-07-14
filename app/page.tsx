@@ -1,22 +1,39 @@
-import Container from "@/components/Container";
+import Image from "next/image";
 import CheckList from "@/components/CheckList";
+import Container from "@/components/Container";
+import HeroVideo from "@/components/HeroVideo";
 import LineCta from "@/components/LineCta";
-import PlaceholderMedia from "@/components/PlaceholderMedia";
 import SectionHeading from "@/components/SectionHeading";
 
-const concerns = [
-  ["01", "顔出しをしたくない"],
-  ["02", "撮影できる環境がない"],
-  ["03", "動画編集が難しそう"],
-  ["04", "AIをどう使えばいいか分からない"],
-  ["05", "何を投稿すればいいか分からない"],
+const results = [
+  { value: "16,873,128", label: "閲覧数" },
+  { value: "99.1%", label: "フォロワー以外からの閲覧" },
+  { value: "7,637,277", label: "リーチしたアカウント" },
 ];
 
-const benefits = [
-  ["01", "再生数アップ", "多くの人に届く可能性が広がる"],
-  ["02", "フォロワー増加", "投稿を待ってくれる人が増える"],
-  ["03", "案件・収益化への活用", "アフィリエイトや商品案内に活用できる"],
-  ["04", "顔出しなしで発信", "自分の生活や身元を出さずに続けやすい"],
+const concerns = [
+  "顔を出したくない",
+  "撮影する場所や機材がない",
+  "編集が難しそう",
+  "どのAIを使えばいいか分からない",
+];
+
+const steps = [
+  {
+    number: "01",
+    title: "画像を用意する",
+    text: "人物や背景の画像を作り、動画の元になる素材を準備します。",
+  },
+  {
+    number: "02",
+    title: "AIで動画化する",
+    text: "画像を読み込み、短い指示文で動きや表情を付けます。",
+  },
+  {
+    number: "03",
+    title: "編集して投稿する",
+    text: "音声、字幕、テンポを整え、Instagram用に書き出します。",
+  },
 ];
 
 const guideItems = [
@@ -25,298 +42,315 @@ const guideItems = [
   "そのまま使えるプロンプト",
   "使用ツールと設定方法",
   "失敗しやすいポイントと対処法",
-  "登録後7日間、最初の1本が完成するまで個別相談",
+  "最初の1本が完成するまでの7日間サポート",
+];
+
+const faqs = [
+  {
+    question: "本当に無料ですか？",
+    answer: "ガイドと7日間サポートの追加料金はありません。利用するAIサービスによっては、別途有料プランが必要になる場合があります。",
+  },
+  {
+    question: "AI初心者でも作れますか？",
+    answer: "初めての人が順番に進められるように、操作画面、設定、入力する文章まで具体的に説明します。",
+  },
+  {
+    question: "スマホだけでも作れますか？",
+    answer: "一部はスマホでも進められますが、画像管理や動画編集はPCを併用した方が進めやすい場合があります。",
+  },
+  {
+    question: "同じ閲覧数を出せますか？",
+    answer: "同じ成果を保証するものではありません。投稿ジャンル、内容、継続期間、各SNSの状況によって結果は変わります。",
+  },
+  {
+    question: "どのAIを使いますか？",
+    answer: "画像生成、動画化、編集に使用するツールと設定をガイド内で説明します。サービスの料金や仕様は変更される場合があります。",
+  },
+  {
+    question: "7日間サポートでは何を相談できますか？",
+    answer: "登録後7日以内に作る最初の動画1本について、テーマ、構成、冒頭、テロップ、生成結果、完成動画の改善点を相談できます。制作代行は含まれません。",
+  },
 ];
 
 const supportNotes = [
-  "個別サポートは、LINE登録後7日以内に制作する最初の動画1本が対象です。",
-  "動画の制作代行や編集代行ではありません。",
-  "内容によっては、すべての要望に対応できない場合があります。",
+  "対象は登録後7日以内に制作する最初の動画1本です。",
+  "動画の制作代行、編集代行ではありません。",
+  "内容によって、すべての要望に対応できない場合があります。",
 ];
 
 const disclaimers = [
-  "本ガイドは、同じ再生数や収益を保証するものではありません。",
+  "本ガイドは、同じ閲覧数や収益を保証するものではありません。",
   "結果は投稿ジャンル、内容、継続期間、各SNSの状況などによって異なります。",
-  "一部のサービス紹介リンクには、アフィリエイトリンクが含まれる場合があります。",
-  "リンクを経由しても、利用者の料金が上乗せされるものではありません。",
+  "紹介するサービスの一部には、アフィリエイトリンクが含まれる場合があります。リンクを経由しても、利用料金が上乗せされることはありません。",
   "AIサービスの料金、仕様、利用可能なモデルは変更される場合があります。",
 ];
 
 export default function Home() {
   const lineUrl = process.env.NEXT_PUBLIC_LINE_URL || "#";
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
 
   return (
-    <main>
+    <main className="overflow-x-clip">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <a
-        href="#content"
-        className="sr-only z-50 rounded-md bg-white px-4 py-3 text-sm font-bold text-zinc-950 focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        href="#main-content"
+        className="sr-only z-50 rounded-xl bg-white px-4 py-3 font-bold text-[#171717] focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         本文へ移動
       </a>
 
-      <section className="relative overflow-hidden border-b border-zinc-200 bg-white pb-20 pt-6 sm:pb-28 sm:pt-8 lg:pb-32">
-        <div aria-hidden="true" className="hero-grid absolute inset-0 opacity-45" />
-        <Container className="relative">
-          <header className="mb-14 flex items-center justify-between sm:mb-20">
-            <a
-              href="#content"
-              className="inline-flex items-center gap-3 rounded-md font-extrabold tracking-tight text-zinc-950 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
-              aria-label="AI Video Guide トップ"
-            >
-              <span className="grid size-9 place-items-center rounded-xl bg-zinc-950 text-xs text-white">AI</span>
-              <span>AI Video Guide</span>
-            </a>
-            <span className="hidden text-sm font-medium text-zinc-500 sm:block">無料完全ガイド</span>
-          </header>
-
-          <div className="grid items-center gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:gap-16">
-            <div>
-              <p className="mb-5 inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-800">
-                顔出しなし・撮影なし・専門スキルなし
-              </p>
-              <h1 className="text-balance text-[clamp(2.35rem,6vw,4.65rem)] font-black leading-[1.12] tracking-[-0.045em] text-zinc-950">
-                <span className="block">月間<span className="text-emerald-700">1,500万再生</span>を達成した</span>
-                <span className="mt-2 block"><span className="underlined">AI動画</span>の作り方を<span className="text-emerald-700">無料公開</span></span>
-              </h1>
-              <p className="mt-7 max-w-2xl text-base leading-8 text-zinc-600 sm:text-lg sm:leading-9">
-                私が実際に運用しているInstagramアカウントで使っている、画像生成から動画編集までの制作手順を公開します。
-              </p>
-              <div className="mt-9 max-w-xl">
-                <LineCta href={lineUrl} />
-                <p className="mt-4 text-center text-sm font-medium text-zinc-600">LINE登録後、完全版ガイドのURLが自動で届きます</p>
-                <p className="mt-1 text-center text-xs text-zinc-500">追加料金はかかりません</p>
-              </div>
-            </div>
-
-            <PlaceholderMedia
-              kind="hero"
-              label="AI動画の作例"
-              source="/assets/hero-video.mp4"
-              poster="/assets/hero-poster.webp"
-              priority
-            />
+      <header className="border-b border-black/10 bg-[#F7F5EF]">
+        <Container className="flex h-16 items-center justify-between sm:h-[72px]">
+          <a
+            href="#main-content"
+            className="rounded-lg text-[15px] font-black tracking-[-0.02em] text-[#171717] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#6547E8]/25 sm:text-base"
+            aria-label="AI動画無料ガイド トップ"
+          >
+            AI動画無料ガイド
+          </a>
+          <div className="hidden sm:block">
+            <LineCta href={lineUrl} location="header" compact />
           </div>
         </Container>
-      </section>
+      </header>
 
-      <div id="content">
-        <section className="section-space bg-zinc-50">
-          <Container>
-            <SectionHeading
-              eyebrow="RESULTS"
-              title="顔を出さなくても、動画はここまで伸ばせます"
-              description="私は顔出しをせず、撮影機材も使わずにInstagramを運用しています。特別な動画編集スキルがあったわけでもありません。AIを使った動画制作を試しながら改善した結果、月間の再生数は約1,500万回まで伸びました。"
-            />
+      <div id="main-content">
+        <section className="bg-[#F7F5EF] py-10 sm:py-14 lg:py-16">
+          <Container className="grid max-w-[1180px] grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16">
+            <div className="min-w-0 max-w-[730px]">
+              <p className="inline-flex rounded-full border border-[#6547E8]/20 bg-white/80 px-4 py-2 text-[13px] font-bold text-[#4D35B8] sm:text-sm">
+                顔出しなし・撮影なし・専門スキルなし
+              </p>
+              <h1 className="mt-5 text-[clamp(2.45rem,5.2vw,4.25rem)] font-black leading-[1.12] tracking-[-0.055em] text-[#171717]">
+                <span className="block">AI動画で、</span>
+                <span className="mt-1 block lg:whitespace-nowrap">
+                  <span className="block whitespace-nowrap sm:inline">約1か月で</span>
+                  <span className="block whitespace-nowrap text-[#6547E8] sm:inline">1,687万閲覧。</span>
+                </span>
+              </h1>
+              <p className="mt-6 text-[18px] font-black leading-[1.75] tracking-[-0.025em] text-[#171717] sm:text-2xl sm:leading-[1.65]">
+                顔出しも、撮影も不要。<br />
+                実際に使っている制作手順を<br className="sm:hidden" />無料で公開します。
+              </p>
+              <p className="mt-5 max-w-[680px] text-[15px] leading-[1.9] text-[#66635C] sm:text-[17px]">
+                顔出しなしで運用しているInstagramアカウントで実際に使っている、画像生成から動画化・編集・投稿までの手順を、プロンプトと操作画面付きで公開します。
+              </p>
 
-            <div className="mt-12 grid gap-4 md:grid-cols-3">
-              {[
-                ["月間再生数", "約1,500万回"],
-                ["フォロワー", "約1.4万人"],
-                ["1本あたり平均", "約50万再生"],
-              ].map(([label, value]) => (
-                <article key={label} className="rounded-3xl border border-zinc-200 bg-white p-7 shadow-[0_12px_35px_rgba(24,24,27,0.05)] sm:p-8">
-                  <p className="text-sm font-bold text-zinc-500">{label}</p>
-                  <p className="mt-3 text-3xl font-black tracking-tight text-zinc-950 sm:text-4xl">{value}</p>
-                  <p className="mt-4 text-xs text-zinc-500">本人が申告する運用実績</p>
-                </article>
-              ))}
+              <div className="mt-7 max-w-[560px]">
+                <LineCta href={lineUrl} location="hero" />
+                <p className="mt-3 text-center text-sm font-bold text-[#35332F]">登録後すぐに完全版ガイドが届きます</p>
+                <div className="mt-3 flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs leading-6 text-[#66635C] sm:text-[13px]">
+                  <span>最初の1本まで<span className="whitespace-nowrap font-bold text-[#4D35B8]">7日間サポート付き</span></span>
+                  <span>ガイドの追加料金なし</span>
+                </div>
+                <p className="mt-2 text-center text-[11px] leading-5 text-[#77736B] sm:text-xs">※同じ閲覧数や成果を保証するものではありません。</p>
+              </div>
             </div>
-            <p className="mt-5 text-xs leading-6 text-zinc-500">※運用中のアカウント実績。再生数やフォロワー数は時期により変動します。</p>
 
-            <div className="mt-10">
-              <PlaceholderMedia
-                kind="image"
-                label="Instagramインサイト画像をここに配置"
-                source="/assets/instagram-insight.webp"
+            <div className="mx-auto w-full max-w-[350px]">
+              <p className="mb-3 text-center text-xs font-bold tracking-[0.08em] text-[#66635C]">実際に作成したAI動画</p>
+              <HeroVideo />
+            </div>
+          </Container>
+        </section>
+
+        <section className="section-space border-y border-black/10 bg-white" aria-labelledby="results-heading">
+          <Container className="grid max-w-[1160px] grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_470px] lg:items-center lg:gap-20">
+            <div className="min-w-0">
+              <SectionHeading
+                id="results-heading"
+                label="実際の運用結果"
+                title="数字だけでなく、実際のインサイトも公開します"
+                align="left"
               />
-            </div>
-          </Container>
-        </section>
-
-        <section className="section-space bg-white">
-          <Container>
-            <SectionHeading eyebrow="CONCERNS" title="こんな悩みはありませんか？" />
-            <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-5 md:gap-4">
-              {concerns.map(([number, label]) => (
-                <article key={number} className="rounded-3xl border border-zinc-200 bg-white p-5 shadow-[0_10px_30px_rgba(24,24,27,0.04)] sm:p-6">
-                  <span className="grid size-10 place-items-center rounded-full bg-emerald-50 text-xs font-black text-emerald-700">{number}</span>
-                  <h3 className="mt-5 text-sm font-bold leading-6 text-zinc-900 sm:text-base sm:leading-7">{label}</h3>
-                </article>
-              ))}
-            </div>
-            <div className="prose-copy mx-auto mt-12 max-w-3xl border-l-2 border-emerald-500 pl-6">
-              <p>動画を始めたいと思っていても、顔出し、撮影、編集の壁で止まってしまう人は少なくありません。</p>
-              <p>私自身も、以前は同じ理由でなかなか始められませんでした。</p>
-            </div>
-          </Container>
-        </section>
-
-        <section className="section-space overflow-hidden bg-emerald-50/70">
-          <Container>
-            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-              <div>
-                <SectionHeading
-                  align="left"
-                  eyebrow="WHAT AI MAKES POSSIBLE"
-                  title="画像だった人物が、自然に動き出す"
-                />
-                <div className="prose-copy mt-8">
-                  <p>以前なら、撮影や専門的な編集が必要だった映像も、今は数枚の画像とAIを使って形にできるようになりました。</p>
-                  <p>出演者を用意したり、外へ撮影に行ったりしなくても、自分のアイデアを動画として発信できます。</p>
-                </div>
-              </div>
-              <PlaceholderMedia
-                kind="video"
-                label="AI動画の作例をここに配置"
-                source="/assets/sample-video.mp4"
-                poster="/assets/sample-poster.webp"
-              />
-            </div>
-            <div className="mx-auto mt-12 max-w-3xl rounded-3xl bg-white p-7 shadow-[0_12px_40px_rgba(6,78,59,0.07)] sm:p-9">
-              <p className="text-base font-bold leading-8 text-zinc-900 sm:text-lg">完成した動画を見ると難しそうに感じるかもしれません。</p>
-              <div className="prose-copy mt-4">
-                <p>ですが、実際に行うのは、決められた順番で画像を用意し、AIに指示を出すことです。</p>
-                <p>具体的な操作画面と入力する文章は、LINE登録後の完全版ガイドで公開します。</p>
-              </div>
-            </div>
-          </Container>
-        </section>
-
-        <section className="section-space bg-white">
-          <Container size="text">
-            <SectionHeading align="left" eyebrow="WHY FREE" title="なぜ、無料で公開するのか" />
-            <div className="story-copy mt-12 border-l-2 border-emerald-500 pl-6 sm:pl-10">
-              <p>私自身、以前から動画を作って発信してみたいと思っていました。</p>
-              <p>ただ、顔出しには抵抗がありました。撮影する場所や機材もなく、動画編集の専門知識もありません。</p>
-              <blockquote>「自分には難しそう」<br />「顔を出せないなら無理だろう」</blockquote>
-              <p>そう考えて、興味はあっても、なかなか始めることができませんでした。</p>
-              <p className="font-bold text-zinc-950">そんな状況を変えてくれたのが、AIです。</p>
-              <p>AIが登場したことで、顔を出さなくても、撮影をしなくても、頭の中にあるアイデアを動画として形にできるようになりました。</p>
-              <p>ただ、最初はどのAIを使えばいいのか分からず、必要のないプランを契約したり、使えない動画に時間や費用を使ったりしました。</p>
-              <p>かなり遠回りをしたと思います。</p>
-              <p>だからこそ、これから始める人には、私と同じ失敗を繰り返してほしくありません。</p>
-              <p>今は、情報もツールも次々に更新される時代です。自分だけが知っている方法を隠し続けても、いずれ似た情報は広がっていきます。</p>
-              <p>それなら、私が実際に試して分かったことを使える形でまとめて公開した方がいいと考えました。</p>
-              <p>このガイドを見れば、私が遠回りした部分を省き、最初の一本を完成させるところまで、より早く進めるはずです。</p>
-              <p>顔を出せないことや、専門スキルがないことを理由に、やってみたい気持ちを諦める必要はありません。</p>
-              <p className="font-bold text-zinc-950">その最初のきっかけとして、今回の制作手順を無料で公開します。</p>
-            </div>
-          </Container>
-        </section>
-
-        <section className="section-space bg-zinc-950 text-white">
-          <Container>
-            <SectionHeading
-              dark
-              eyebrow="YOUR NEXT STEP"
-              title="今度は、あなたの動画が伸びる番かもしれません"
-            />
-            <div className="future-copy mx-auto mt-12 max-w-3xl">
-              <p>この作り方を身につければ、ただAI動画を一本作れるようになるだけではありません。</p>
-              <blockquote>「撮影できないから無理」<br />「顔を出したくないから発信できない」</blockquote>
-              <p>と諦めていたアイデアも、動画として形にできるようになります。</p>
-              <p>外に撮影へ行かなくても、出演者を用意しなくても、自分のパソコンやスマートフォンから動画を作って投稿できます。</p>
-              <p className="text-center text-2xl font-black leading-relaxed text-white sm:text-3xl">数千回、数万回、数十万回。<br />内容によっては、100万回以上の人へ。</p>
-              <p>私自身も、最初から月1,500万回再生されていたわけではありません。試しながら一本ずつ動画を作り、伸びた理由と失敗した理由を確認し、少しずつ現在の形にたどり着きました。</p>
-              <p>もちろん、このガイドを見れば誰でも必ず同じ再生数になるわけではありません。投稿するジャンル、内容、継続期間によって結果は変わります。</p>
-              <p>ただ、私が実際に使用している作り方を知ることで、何も分からない状態から一人で遠回りする必要はなくなります。</p>
-              <p>今は動画を見る側でも、数週間後には、自分が作った動画の再生数が伸びていく画面を見ているかもしれません。</p>
-              <p>フォロワーが増え、コメントや保存が入り、自分の発信を待ってくれる人が生まれる。そこから、アフィリエイト、企業や個人からの案件、自分の商品やサービスの集客につなげていくこともできます。</p>
-              <p className="font-bold text-white">その最初の一歩は、まず一本の動画を自分で完成させることです。</p>
-            </div>
-
-            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {benefits.map(([number, title, description]) => (
-                <article key={number} className="rounded-3xl border border-white/10 bg-white/[0.06] p-6">
-                  <span className="text-xs font-black tracking-widest text-emerald-400">{number}</span>
-                  <h3 className="mt-4 text-lg font-bold text-white">{title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-zinc-400">{description}</p>
-                </article>
-              ))}
-            </div>
-
-            <div className="mx-auto mt-14 max-w-xl">
-              <LineCta href={lineUrl} />
-              <p className="mt-4 text-center text-sm text-zinc-400">登録後、完全版ガイドのURLが自動で届きます</p>
-            </div>
-          </Container>
-        </section>
-
-        <section className="section-space bg-emerald-50/70">
-          <Container>
-            <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
-              <div>
-                <SectionHeading align="left" eyebrow="FREE GUIDE" title="LINE登録後に受け取れる内容" />
-                <div className="mt-9">
-                  <CheckList items={guideItems} />
-                </div>
-                <div className="prose-copy mt-9">
-                  <p>登録後に、完全版ガイドを見るためのURLが自動で届きます。教材を受け取るための追加料金はありません。</p>
-                  <p>LINEは、ガイドの配布、内容の更新、動画内で説明しきれなかった補足を届けるために使用します。</p>
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-                {[
-                  ["GUIDE", "完全版ガイド", "画像生成から編集までを順番に"],
-                  ["VIDEO", "解説動画", "実際の操作画面で迷わず進める"],
-                  ["PROMPT", "プロンプト集", "そのまま使える指示文を収録"],
-                ].map(([tag, title, text]) => (
-                  <article key={tag} className="relative overflow-hidden rounded-3xl border border-emerald-100 bg-white p-7 shadow-[0_12px_35px_rgba(6,78,59,0.06)]">
-                    <span className="text-xs font-black tracking-[0.18em] text-emerald-700">{tag}</span>
-                    <h3 className="mt-3 text-xl font-black text-zinc-950">{title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-zinc-600">{text}</p>
-                    <span aria-hidden="true" className="absolute -bottom-6 -right-4 text-8xl font-black text-emerald-50">{tag.slice(0, 1)}</span>
-                  </article>
+              <p className="mt-6 max-w-[620px] text-base leading-[1.9] text-[#66635C] sm:text-[18px]">
+                <span className="whitespace-nowrap font-bold text-[#171717]">5月10日〜6月10日</span>の閲覧数は
+                <span className="whitespace-nowrap font-bold text-[#6547E8]">16,873,128</span>。
+                そのうち<span className="whitespace-nowrap font-bold text-[#6547E8]">99.1%</span>がフォロワー以外からの閲覧でした。
+              </p>
+              <div className="mt-9 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {results.map((result) => (
+                  <div key={result.label} className="flex items-baseline justify-between gap-4 border-b border-black/10 py-4 sm:block lg:flex">
+                    <p className="whitespace-nowrap text-[clamp(1.75rem,4vw,2.5rem)] font-black tracking-[-0.04em] text-[#171717]">{result.value}</p>
+                    <p className="text-right text-xs font-bold leading-5 text-[#66635C] sm:mt-2 sm:text-left lg:mt-0 lg:text-right lg:text-sm">{result.label}</p>
+                  </div>
                 ))}
               </div>
             </div>
+            <figure className="mx-auto w-full max-w-[470px]">
+              <div className="overflow-hidden rounded-[28px] border border-black/10 bg-white p-2 shadow-[0_18px_45px_rgba(23,23,23,0.12)] sm:p-3">
+                <Image
+                  src="/assets/instagram-insight.webp"
+                  alt="5月10日から6月10日の閲覧数16,873,128、フォロワー以外99.1%、リーチしたアカウント7,637,277を示すInstagramインサイト"
+                  width={1206}
+                  height={1711}
+                  className="h-auto w-full rounded-[20px] object-contain"
+                  sizes="(max-width: 768px) 92vw, 470px"
+                />
+              </div>
+              <figcaption className="mt-4 text-center text-xs leading-6 text-[#66635C] sm:text-[13px]">
+                Instagramアプリの実際のインサイト画面<br />数値と期間は加工していません
+              </figcaption>
+            </figure>
           </Container>
         </section>
 
-        <section className="section-space bg-white">
-          <Container size="text">
-            <SectionHeading eyebrow="7-DAY SUPPORT" title="最初の1本を完成させるための個別サポート" />
-            <div className="story-copy mt-12">
-              <p>ガイドを見ても、</p>
-              <blockquote>「どんな動画を作ればいいか分からない」<br />「この構成でいいのか不安」<br />「生成した動画のどこを直せばいいか分からない」</blockquote>
-              <p>と迷うこともあると思います。</p>
-              <p>そこで、LINE登録後7日以内に制作する最初の動画1本について、内容や構成の相談を受け付けます。</p>
-              <p>動画のテーマ、構成、冒頭の見せ方、ナレーション、テロップ、生成結果、完成動画の改善点など、迷った部分はLINEから相談してください。</p>
-              <p className="font-bold text-zinc-950">作り方を知るだけで終わらず、実際に最初の1本を完成させるところまで進めてもらいたいと思っています。</p>
+        <section className="section-space bg-[#F7F5EF]" aria-labelledby="concerns-heading">
+          <Container>
+            <SectionHeading id="concerns-heading" label="始められない理由" title="こんな理由で、動画発信を止めていませんか？" />
+            <div className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-5">
+              {concerns.map((concern) => (
+                <div key={concern} className="rounded-[22px] border border-black/10 bg-white px-5 py-6 sm:px-6 sm:py-7">
+                  <span aria-hidden="true" className="mb-5 block h-1.5 w-8 rounded-full bg-[#6547E8]" />
+                  <p className="text-[15px] font-bold leading-[1.7] text-[#171717] sm:text-lg">{concern}</p>
+                </div>
+              ))}
             </div>
-            <aside className="mt-10 rounded-3xl bg-zinc-50 p-6 sm:p-8" aria-label="個別サポートの注意事項">
-              <ul className="space-y-3 text-sm leading-7 text-zinc-600">
-                {supportNotes.map((note) => <li key={note}>※{note}</li>)}
+            <p className="mx-auto mt-10 max-w-[760px] text-center text-base font-medium leading-[2] text-[#4F4C46] sm:text-lg">
+              必要なのは、出演者や高価な撮影機材ではありません。<br className="hidden sm:block" />
+              画像を用意し、AIで動かし、短く編集する。最初の1本は、この順番で作れます。
+            </p>
+          </Container>
+        </section>
+
+        <section className="section-space border-y border-black/10 bg-white" aria-labelledby="steps-heading">
+          <Container>
+            <SectionHeading id="steps-heading" label="制作の流れ" title="最初の1本は、3ステップ" />
+            <div className="relative mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-7">
+              <div aria-hidden="true" className="absolute left-[16.66%] right-[16.66%] top-8 hidden h-px bg-[#6547E8]/25 lg:block" />
+              {steps.map((step) => (
+                <article key={step.number} className="relative rounded-[24px] border border-black/10 bg-[#F7F5EF] p-6 sm:p-8">
+                  <span className="relative z-10 grid size-16 place-items-center rounded-full bg-[#6547E8] text-sm font-black text-white shadow-[0_8px_20px_rgba(101,71,232,0.18)]">STEP<br />{step.number}</span>
+                  <h3 className="mt-6 text-xl font-black tracking-[-0.02em] text-[#171717] sm:text-2xl">{step.title}</h3>
+                  <p className="mt-3 text-[15px] leading-[1.85] text-[#66635C] sm:text-base">{step.text}</p>
+                </article>
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        <section className="section-space bg-[#F7F5EF]" aria-labelledby="guide-heading">
+          <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_430px] lg:items-start lg:gap-16">
+            <div className="min-w-0">
+              <SectionHeading id="guide-heading" label="登録特典" title="LINE登録後に受け取れるもの" align="left" />
+              <p className="mt-6 max-w-[620px] text-base leading-[1.9] text-[#66635C] sm:text-[18px]">
+                登録後すぐに、完全版ガイドのURLが自動で届きます。画像の作り方、動画化、編集、投稿までを順番に確認できます。
+              </p>
+              <div className="mt-8">
+                <CheckList items={guideItems} />
+              </div>
+            </div>
+            <aside className="rounded-[28px] bg-[#171717] p-7 text-white shadow-[0_18px_45px_rgba(23,23,23,0.12)] sm:p-9" aria-label="完全版ガイドの概要">
+              <p className="text-xs font-bold tracking-[0.14em] text-[#B8A9FF]">COMPLETE GUIDE</p>
+              <h3 className="mt-4 text-2xl font-black leading-[1.5] sm:text-3xl">迷わず進めるための<br />制作ロードマップ</h3>
+              <ol className="mt-7 space-y-4 border-l border-white/20 pl-5 text-sm leading-7 text-white/75 sm:text-base">
+                <li>画像を作る</li>
+                <li>AIで動きを付ける</li>
+                <li>音声・字幕を整える</li>
+                <li>投稿用に書き出す</li>
+              </ol>
+              <div className="mt-8">
+                <LineCta href={lineUrl} location="guide" />
+              </div>
+              <p className="mt-3 text-center text-xs leading-5 text-white/60">登録後すぐに届きます・追加料金なし</p>
+            </aside>
+          </Container>
+        </section>
+
+        <section className="section-space border-y border-black/10 bg-white" aria-labelledby="reason-heading">
+          <Container size="text">
+            <SectionHeading id="reason-heading" label="無料公開の理由" title="遠回りした部分まで、まとめて公開します" align="left" />
+            <div className="mt-8 space-y-5 text-base leading-[2] text-[#5B5852] sm:text-[18px]">
+              <p>私自身、最初はどのAIを使えばいいか分からず、必要のないプランを契約したり、使えない生成に時間や費用を使ったりしました。</p>
+              <p>これから始める人には、同じ遠回りをしてほしくありません。そこで、実際に使っている制作手順と、失敗しやすいポイントを無料でまとめました。</p>
+            </div>
+            <div className="mt-8 rounded-[22px] border border-[#6547E8]/20 bg-[#F4F0FF] px-6 py-5 text-sm leading-[1.9] text-[#4F476A] sm:px-7 sm:text-[15px]">
+              紹介するサービスの一部には、アフィリエイトリンクが含まれる場合があります。リンクを経由しても、利用料金が上乗せされることはありません。
+            </div>
+          </Container>
+        </section>
+
+        <section className="section-space bg-[#F7F5EF]" aria-labelledby="support-heading">
+          <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start lg:gap-16">
+            <div className="min-w-0">
+              <SectionHeading id="support-heading" label="7日間サポート" title="見るだけで終わらせないための、7日間サポート" align="left" />
+              <p className="mt-7 text-base leading-[1.95] text-[#66635C] sm:text-[18px]">
+                登録後7日以内に作る最初の動画1本について、テーマ、構成、冒頭の見せ方、テロップ、生成結果、完成動画の改善点をLINEで相談できます。
+              </p>
+              <p className="mt-6 border-l-[3px] border-[#6547E8] pl-5 text-lg font-black leading-[1.8] text-[#171717] sm:text-xl">
+                作り方を読むだけで終わらず、最初の1本を完成させるところまで進めてもらうためのサポートです。
+              </p>
+            </div>
+            <aside className="rounded-[24px] border border-black/10 bg-white p-6 sm:p-8" aria-label="7日間サポートの対象範囲">
+              <p className="text-base font-black text-[#171717]">サポートの対象範囲</p>
+              <ul className="mt-5 space-y-4 text-sm leading-[1.8] text-[#5F5C56] sm:text-[15px]">
+                {supportNotes.map((note) => (
+                  <li key={note} className="flex gap-3">
+                    <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-[#6547E8]" />
+                    <span>{note}</span>
+                  </li>
+                ))}
               </ul>
             </aside>
           </Container>
         </section>
 
-        <section className="bg-zinc-950 py-20 text-white sm:py-28">
-          <Container size="text" className="text-center">
-            <p className="mb-5 text-xs font-black tracking-[0.2em] text-emerald-400">START TODAY</p>
-            <h2 className="text-balance text-3xl font-black leading-tight tracking-tight sm:text-5xl">顔出しなしで、最初の一本を作ってみてください</h2>
-            <div className="mx-auto mt-8 max-w-2xl space-y-4 text-base leading-8 text-zinc-300 sm:text-lg sm:leading-9">
-              <p>私が遠回りして見つけた作り方を、あなたは最初から使えます。</p>
-              <p>最初から完璧に理解する必要はありません。ガイドを見ながら同じ順番で進め、まずは一本、自分の動画を形にしてみてください。</p>
+        <section className="section-space border-y border-black/10 bg-white" aria-labelledby="faq-heading">
+          <Container size="text">
+            <SectionHeading id="faq-heading" label="よくある質問" title="登録前のご質問" />
+            <div className="mt-10 divide-y divide-black/10 border-y border-black/10">
+              {faqs.map((faq) => (
+                <details key={faq.question} className="group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-6 text-left text-base font-black leading-7 text-[#171717] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#6547E8]/20 sm:text-lg [&::-webkit-details-marker]:hidden">
+                    <span><span className="mr-2 text-[#6547E8]">Q.</span>{faq.question}</span>
+                    <span aria-hidden="true" className="text-2xl font-light text-[#6547E8] transition-transform group-open:rotate-45">＋</span>
+                  </summary>
+                  <div className="pb-6 pr-8 text-[15px] leading-[1.9] text-[#66635C] sm:text-base">
+                    <span className="mr-2 font-black text-[#171717]">A.</span>{faq.answer}
+                  </div>
+                </details>
+              ))}
             </div>
-            <div className="mx-auto mt-10 max-w-xl">
-              <LineCta href={lineUrl} />
-              <p className="mt-4 text-sm text-zinc-400">登録後、完全版ガイドのURLが自動で届きます</p>
-              <p className="mt-1 text-xs text-zinc-500">追加料金はかかりません</p>
+          </Container>
+        </section>
+
+        <section className="bg-[#171717] py-16 text-white sm:py-24" aria-labelledby="final-heading">
+          <Container size="text" className="text-center">
+            <p className="text-sm font-bold text-[#B8A9FF]">完全版ガイド＋7日間サポート</p>
+            <h2 id="final-heading" className="mt-4 text-[2.15rem] font-black leading-[1.25] tracking-[-0.04em] sm:text-5xl">まずは1本、完成させる。</h2>
+            <p className="mx-auto mt-6 max-w-[620px] text-base leading-[1.9] text-white/70 sm:text-lg">
+              登録後すぐに完全版ガイドが届きます。<br className="hidden sm:block" />途中で迷ったら、7日間のサポートを使ってください。
+            </p>
+            <div className="mx-auto mt-9 max-w-[560px]">
+              <LineCta href={lineUrl} location="final" />
+              <div className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs leading-6 text-white/60 sm:text-[13px]">
+                <span>登録後すぐに届きます</span>
+                <span>ガイドの追加料金なし</span>
+                <span>最初の1本まで<span className="whitespace-nowrap">7日間サポート</span></span>
+              </div>
             </div>
           </Container>
         </section>
       </div>
 
-      <footer className="border-t border-zinc-200 bg-white py-12">
+      <footer className="bg-[#F7F5EF] py-10 sm:py-12">
         <Container size="text">
-          <ul className="space-y-2 text-xs leading-6 text-zinc-500">
+          <ul className="space-y-2 text-[11px] leading-6 text-[#77736B] sm:text-xs">
             {disclaimers.map((text) => <li key={text}>※{text}</li>)}
           </ul>
-          <div className="mt-10 flex flex-col gap-3 border-t border-zinc-200 pt-7 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
-            <span className="font-bold text-zinc-800">AI Video Guide</span>
+          <div className="mt-8 flex flex-col gap-2 border-t border-black/10 pt-6 text-xs text-[#77736B] sm:flex-row sm:items-center sm:justify-between">
+            <span className="font-black text-[#35332F]">AI動画無料ガイド</span>
             <span>© {new Date().getFullYear()} AI Video Guide</span>
           </div>
         </Container>

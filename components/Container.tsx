@@ -9,5 +9,5 @@ type ContainerProps = {
 export default function Container({ children, className = "", size = "default" }: ContainerProps) {
   const width = size === "text" ? "max-w-[800px]" : "max-w-[1120px]";
 
-  return <div className={`mx-auto w-full ${width} px-5 sm:px-8 ${className}`}>{children}</div>;
+  return <div className={`site-container min-w-0 ${width} ${className}`}>{children}</div>;
 }

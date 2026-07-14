@@ -1,8 +1,8 @@
 # AI Video Guide LP
 
-Instagramから訪れたユーザーに、顔出し・撮影・専門スキルなしで始められるAI動画制作の可能性を伝え、LINE公式アカウントへの登録につなげる1ページ構成のランディングページです。
+Instagramから訪れたユーザーへ、顔出し・撮影・専門スキルなしで始められるAI動画制作を伝え、LINE公式アカウントへの登録につなげるランディングページです。
 
-実績、よくある悩み、AI動画で可能になること、無料公開の理由、登録特典、7日間の個別サポートを、モバイルファーストで読みやすく構成しています。
+5月10日〜6月10日のInstagram運用実績（16,873,128閲覧、フォロワー以外99.1%、リーチ7,637,277）と実際のインサイト画像を提示し、完全版ガイドと最初の1本までの7日間サポートを案内します。
 
 ## 使用技術
 
@@ -26,7 +26,7 @@ npm run dev
 
 ブラウザで [http://localhost:3000](http://localhost:3000) を開きます。
 
-品質確認には次のコマンドを使います。
+品質確認：
 
 ```bash
 npm run lint
@@ -39,34 +39,33 @@ npm run build
 
 `.env.example` をコピーして `.env.local` を作成し、実際のLINE公式アカウントURLへ変更してください。
 
-```bash
+```env
 NEXT_PUBLIC_LINE_URL=https://line.me/R/ti/p/XXXXXXXX
 ```
 
 変更後は開発サーバーを再起動してください。Vercelでは、プロジェクトの「Settings」→「Environment Variables」に同じ名前と値を登録して再デプロイします。
 
-## 画像・動画素材の差し替え
+## 使用素材
 
-素材は `public/assets` に配置します。ファイルがない間は、用途と差し替え先が分かるCSSプレースホルダーが表示されます。実物を同じファイル名で配置し、再ビルドすると自動的に画像・動画へ切り替わります。
+素材は `public/assets` に配置します。
 
-| ファイル | 用途 | 推奨仕様 |
+| ファイル | 用途 | 仕様 |
 | --- | --- | --- |
-| `public/assets/hero-video.mp4` | ファーストビューのAI動画作例 | 縦型 1080×1350px または 1080×1920px、H.264、10MB以下推奨 |
-| `public/assets/hero-poster.webp` | ファーストビュー動画のポスター | 動画と同じ縦横比、幅1080px程度 |
-| `public/assets/instagram-insight.webp` | 実際のInstagramインサイト画像 | 1600×900px程度、個人情報を確認して掲載 |
-| `public/assets/sample-video.mp4` | AI動画作例 | 縦型 1080×1350px または 1080×1920px、H.264、10MB以下推奨 |
-| `public/assets/sample-poster.webp` | 作例動画のポスター | 動画と同じ縦横比、幅1080px程度 |
-| `public/assets/og-image.webp` | SNSシェア時のOG画像 | 1200×630px |
+| `public/assets/hero-video.mp4` | ファーストビューのAI動画作例 | 1080×1920px、9:16、元画質を維持 |
+| `public/assets/hero-poster.webp` | 動画の初期表示 | 1080×1920px、9:16 |
+| `public/assets/instagram-insight.webp` | 実際のInstagramインサイト | 1206×1711px、数値と期間は未加工 |
+| `public/assets/og-image.webp` | SNSシェア画像 | 1200×630px |
 
-動画には `controls`、`muted`、`loop`、`playsInline`、`preload="metadata"` を設定しています。架空のInstagram画面や偽の実績グラフは使用していません。
+公開ページには不足素材用のプレースホルダーやファイルパスを表示しません。画像・動画を変更する場合は、同じファイル名と用途を保って差し替えてください。
 
 ## 主な編集ファイル
 
-- `app/page.tsx`: ページ内の文章、実績数値、カード、注意事項
-- `app/globals.css`: 全体の色、文字、余白、長文の読みやすさ
-- `app/layout.tsx`: タイトル、説明文、OGP、robots設定
-- `components/LineCta.tsx`: LINE登録ボタンの見た目とアクセシビリティ
-- `components/PlaceholderMedia.tsx`: 画像・動画とプレースホルダーの切り替え
+- `app/page.tsx`: ページ構成、文章、実績、FAQ、構造化データ
+- `app/globals.css`: 色、フォント、セクション余白、共通スタイル
+- `app/layout.tsx`: タイトル、説明文、canonical、OGP、robots
+- `components/HeroVideo.tsx`: 動画再生と停止、motion設定
+- `components/LineCta.tsx`: CTA文言、リンク属性、配置識別用データ属性
+- `components/CheckList.tsx`: 登録特典一覧
 - `.env.local`: LINE登録URL（Git管理対象外）
 
 ## Vercelへの公開
@@ -75,10 +74,10 @@ NEXT_PUBLIC_LINE_URL=https://line.me/R/ti/p/XXXXXXXX
 2. Framework Presetが「Next.js」になっていることを確認します。
 3. Environment Variablesへ `NEXT_PUBLIC_LINE_URL` を登録します。
 4. Deployを実行します。
-5. 公開後、LINE登録ボタン、OG画像、実績画像、動画を実機で確認します。
+5. 公開後、LINE登録ボタン、動画、インサイト画像、OG画像を実機で確認します。
 
-公開後にLINE URLだけを変更する場合も、Vercelの環境変数を更新して再デプロイしてください。
+公開URL：<https://ai-video-guide-lp.vercel.app/>
 
-## 注意
+## 表現上の注意
 
-実績数値は本人申告の運用実績として表示しています。公開前に実際の数値、LINE URL、画像内の個人情報、利用サービスの規約を確認してください。
+実績表現は「約1か月で1,687万閲覧」を使用します。「再生数」への置き換えや、提示されていないフォロワー数・平均再生数の追加はしないでください。同じ閲覧数や成果を保証する表現も使用しません。
