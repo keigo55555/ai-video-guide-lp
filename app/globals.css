@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f5ef;
-  --foreground: #171717;
+  --background: #f7f6f2;
+  --foreground: #151515;
 }
 
 @theme inline {
@@ -32,8 +32,8 @@ body {
 }
 
 ::selection {
-  background: #dcd4ff;
-  color: #171717;
+  background: #dfe3ec;
+  color: #151515;
 }
 
 .section-space {
@@ -52,7 +52,7 @@ body {
 }
 
 details[open] summary {
-  color: #4d35b8;
+  color: #28345c;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -26,7 +26,7 @@ export default function HeroVideo() {
   };
 
   return (
-    <div className="relative aspect-[9/16] overflow-hidden rounded-[30px] border border-black/10 bg-black shadow-[0_18px_45px_rgba(23,23,23,0.16)]">
+    <div className="relative aspect-[9/16] overflow-hidden rounded-[30px] border border-black/10 bg-black shadow-[0_16px_38px_rgba(21,21,21,0.12)]">
       {activated ? (
         <video
           ref={videoRef}
