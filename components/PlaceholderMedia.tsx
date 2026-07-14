@@ -21,15 +21,22 @@ export default function PlaceholderMedia({ kind, label, source, poster, priority
   const displayPath = `/public${source}`;
 
   if ((kind === "video" || kind === "hero") && sourceExists) {
+    const isHero = kind === "hero";
+
     return (
-      <div className="overflow-hidden rounded-[2rem] border border-zinc-200 bg-zinc-950 shadow-[0_24px_70px_rgba(24,24,27,0.14)]">
+      <div
+        className={`mx-auto w-full overflow-hidden rounded-[2rem] border border-zinc-200 bg-zinc-950 shadow-[0_24px_70px_rgba(24,24,27,0.14)] ${
+          isHero ? "max-w-[360px]" : "max-w-[420px]"
+        }`}
+      >
         <video
-          className="aspect-[4/5] w-full object-cover"
-          controls
+          className="block aspect-[9/16] w-full bg-black object-contain"
+          controls={!isHero}
+          autoPlay={isHero}
           muted
           loop
           playsInline
-          preload="metadata"
+          preload={isHero ? "auto" : "metadata"}
           poster={posterExists ? poster : undefined}
           aria-label={label}
         >
@@ -79,7 +86,7 @@ export default function PlaceholderMedia({ kind, label, source, poster, priority
   }
 
   return (
-    <div className={`grid place-items-center rounded-[2rem] border border-dashed border-zinc-300 bg-white p-8 text-center ${kind === "video" ? "aspect-[4/5] max-h-[640px] bg-zinc-900 text-white" : "aspect-[16/7] text-zinc-800"}`}>
+    <div className={`grid place-items-center rounded-[2rem] border border-dashed border-zinc-300 bg-white p-8 text-center ${kind === "video" ? "aspect-[9/16] max-h-[640px] bg-zinc-900 text-white" : "aspect-[16/7] text-zinc-800"}`}>
       <div>
         <span aria-hidden="true" className={`mx-auto mb-5 grid size-14 place-items-center rounded-2xl text-xl ${kind === "video" ? "bg-white/10" : "bg-emerald-50 text-emerald-700"}`}>
           {kind === "video" ? "▶" : "▧"}
