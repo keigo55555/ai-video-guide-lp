@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const siteUrl = "https://ai-video-guide-lp.vercel.app";
-const title = "顔出しなしのAI動画で約1か月1,687万閲覧｜無料制作ガイド";
-const description = "顔出し・撮影・専門スキルなしで始めるAI動画制作。Instagramで約1か月16,873,128閲覧を記録した制作手順を、プロンプトと操作画面付きで無料公開。最初の1本まで7日間サポート付き。";
+const title = "顔出しなしのInstagramリールで約1か月1,687万閲覧｜AI動画無料ガイド";
+const description = "顔出し・撮影・専門スキルなしで始めるAI動画制作。AIを使って作ったInstagramリールが、2026年5月10日から6月10日までの約1か月で合計16,873,128閲覧。実際の制作手順をプロンプトと操作画面付きで無料公開。最初の1本まで7日間サポート付き。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "AI動画無料ガイド",
     locale: "ja_JP",
-    images: [{ url: "/assets/og-image.webp", width: 1200, height: 630, alt: "顔出しなし・撮影なしで作るAI動画無料ガイド" }],
+    images: [{ url: "/assets/og-image.webp", width: 1200, height: 630, alt: "AIを使って作ったInstagramリールが約1か月で合計1,687万閲覧" }],
   },
   twitter: {
     card: "summary_large_image",

@@ -35,7 +35,7 @@ npm run build
 
 ## LINE登録URLの設定
 
-すべてのLINE登録ボタンは、環境変数 `NEXT_PUBLIC_LINE_URL` を参照します。未設定時は `#` になります。
+すべてのLINE登録ボタンは、環境変数 `NEXT_PUBLIC_LINE_URL` を参照します。未設定またはLINE公式ドメイン以外のURLの場合は、リンクを生成せず「LINE登録は現在準備中です」と表示します。
 
 `.env.example` をコピーして `.env.local` を作成し、実際のLINE公式アカウントURLへ変更してください。
 

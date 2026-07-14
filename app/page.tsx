@@ -6,8 +6,8 @@ import LineCta from "@/components/LineCta";
 import SectionHeading from "@/components/SectionHeading";
 
 const results = [
-  { value: "16,873,128", label: "閲覧数" },
-  { value: "99.1%", label: "フォロワー以外からの閲覧" },
+  { value: "16,873,128", label: "約1か月の合計閲覧数" },
+  { value: "1本あたり平均50万回以上", label: "Instagramリールの平均閲覧数", compact: true },
   { value: "7,637,277", label: "リーチしたアカウント" },
 ];
 
@@ -81,12 +81,18 @@ const supportNotes = [
 const disclaimers = [
   "本ガイドは、同じ閲覧数や収益を保証するものではありません。",
   "結果は投稿ジャンル、内容、継続期間、各SNSの状況などによって異なります。",
-  "紹介するサービスの一部には、アフィリエイトリンクが含まれる場合があります。リンクを経由しても、利用料金が上乗せされることはありません。",
   "AIサービスの料金、仕様、利用可能なモデルは変更される場合があります。",
 ];
 
 export default function Home() {
-  const lineUrl = process.env.NEXT_PUBLIC_LINE_URL || "#";
+  const configuredLineUrl = process.env.NEXT_PUBLIC_LINE_URL?.trim();
+  const lineUrl = configuredLineUrl && /^https:\/\/([a-z0-9-]+\.)?(line\.me|lin\.ee)\//i.test(configuredLineUrl)
+    ? configuredLineUrl
+    : undefined;
+
+  if (process.env.NODE_ENV === "development" && !lineUrl) {
+    console.warn("NEXT_PUBLIC_LINE_URLに有効なLINE URLが設定されていません。CTAを無効表示します。");
+  }
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -132,19 +138,19 @@ export default function Home() {
               <p className="inline-flex rounded-full border border-[#6547E8]/20 bg-white/80 px-4 py-2 text-[13px] font-bold text-[#4D35B8] sm:text-sm">
                 顔出しなし・撮影なし・専門スキルなし
               </p>
-              <h1 className="mt-5 text-[clamp(2.45rem,5.2vw,4.25rem)] font-black leading-[1.12] tracking-[-0.055em] text-[#171717]">
-                <span className="block">AI動画で、</span>
-                <span className="mt-1 block lg:whitespace-nowrap">
-                  <span className="block whitespace-nowrap sm:inline">約1か月で</span>
-                  <span className="block whitespace-nowrap text-[#6547E8] sm:inline">1,687万閲覧。</span>
-                </span>
+              <h1 className="mt-5 text-[clamp(2rem,8.8vw,3.75rem)] font-black leading-[1.16] tracking-[-0.05em] text-[#171717]">
+                <span className="block whitespace-nowrap">AIを使って作った</span>
+                <span className="block whitespace-nowrap">Instagramリールが、</span>
+                <span className="mt-1 block whitespace-nowrap">約1か月で</span>
+                <span className="block whitespace-nowrap text-[#6547E8]">合計1,687万閲覧。</span>
               </h1>
               <p className="mt-6 text-[18px] font-black leading-[1.75] tracking-[-0.025em] text-[#171717] sm:text-2xl sm:leading-[1.65]">
-                顔出しも、撮影も不要。<br />
-                実際に使っている制作手順を<br className="sm:hidden" />無料で公開します。
+                実際に使った制作手順を、<br />
+                プロンプトと操作画面付きで無料公開します。
               </p>
               <p className="mt-5 max-w-[680px] text-[15px] leading-[1.9] text-[#66635C] sm:text-[17px]">
-                顔出しなしで運用しているInstagramアカウントで実際に使っている、画像生成から動画化・編集・投稿までの手順を、プロンプトと操作画面付きで公開します。
+                画像生成から動画化・編集・投稿まで、<br />
+                最初の1本を作る順番で解説します。
               </p>
 
               <div className="mt-7 max-w-[560px]">
@@ -171,22 +177,25 @@ export default function Home() {
               <SectionHeading
                 id="results-heading"
                 label="実際の運用結果"
-                title="数字だけでなく、実際のインサイトも公開します"
+                title={<>2026年5月10日〜6月10日の<br />Instagramリール運用実績</>}
                 align="left"
               />
               <p className="mt-6 max-w-[620px] text-base leading-[1.9] text-[#66635C] sm:text-[18px]">
-                <span className="whitespace-nowrap font-bold text-[#171717]">5月10日〜6月10日</span>の閲覧数は
-                <span className="whitespace-nowrap font-bold text-[#6547E8]">16,873,128</span>。
-                そのうち<span className="whitespace-nowrap font-bold text-[#6547E8]">99.1%</span>がフォロワー以外からの閲覧でした。
+                AIを使って作ったInstagramリールの<br />
+                合計閲覧数は<span className="whitespace-nowrap font-bold text-[#6547E8]">16,873,128</span>。<br />
+                リーチしたアカウントは<span className="whitespace-nowrap font-bold text-[#171717]">7,637,277</span>でした。
               </p>
               <div className="mt-9 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 {results.map((result) => (
                   <div key={result.label} className="flex items-baseline justify-between gap-4 border-b border-black/10 py-4 sm:block lg:flex">
-                    <p className="whitespace-nowrap text-[clamp(1.75rem,4vw,2.5rem)] font-black tracking-[-0.04em] text-[#171717]">{result.value}</p>
+                    <p className={`whitespace-nowrap font-black tracking-[-0.04em] text-[#171717] ${result.compact ? "text-[clamp(1.35rem,2.6vw,2rem)]" : "text-[clamp(1.75rem,4vw,2.5rem)]"}`}>{result.value}</p>
                     <p className="text-right text-xs font-bold leading-5 text-[#66635C] sm:mt-2 sm:text-left lg:mt-0 lg:text-right lg:text-sm">{result.label}</p>
                   </div>
                 ))}
               </div>
+              <p className="mt-4 text-xs leading-6 text-[#66635C] sm:text-[13px]">
+                閲覧の99.1%はフォロワー以外からでした。
+              </p>
             </div>
             <figure className="mx-auto w-full max-w-[470px]">
               <div className="overflow-hidden rounded-[28px] border border-black/10 bg-white p-2 shadow-[0_18px_45px_rgba(23,23,23,0.12)] sm:p-3">
@@ -199,9 +208,6 @@ export default function Home() {
                   sizes="(max-width: 768px) 92vw, 470px"
                 />
               </div>
-              <figcaption className="mt-4 text-center text-xs leading-6 text-[#66635C] sm:text-[13px]">
-                Instagramアプリの実際のインサイト画面<br />数値と期間は加工していません
-              </figcaption>
             </figure>
           </Container>
         </section>
@@ -251,10 +257,10 @@ export default function Home() {
                 <CheckList items={guideItems} />
               </div>
             </div>
-            <aside className="rounded-[28px] bg-[#171717] p-7 text-white shadow-[0_18px_45px_rgba(23,23,23,0.12)] sm:p-9" aria-label="完全版ガイドの概要">
-              <p className="text-xs font-bold tracking-[0.14em] text-[#B8A9FF]">COMPLETE GUIDE</p>
+            <aside className="rounded-[28px] border border-black/10 bg-[#F4F0FF] p-7 text-[#171717] shadow-[0_12px_30px_rgba(23,23,23,0.07)] sm:p-9 lg:mt-8" aria-label="完全版ガイドの概要">
+              <p className="text-xs font-bold tracking-[0.12em] text-[#6547E8]">無料ガイドの内容</p>
               <h3 className="mt-4 text-2xl font-black leading-[1.5] sm:text-3xl">迷わず進めるための<br />制作ロードマップ</h3>
-              <ol className="mt-7 space-y-4 border-l border-white/20 pl-5 text-sm leading-7 text-white/75 sm:text-base">
+              <ol className="mt-7 space-y-4 border-l border-black/10 pl-5 text-sm leading-7 text-[#66635C] sm:text-base">
                 <li>画像を作る</li>
                 <li>AIで動きを付ける</li>
                 <li>音声・字幕を整える</li>
@@ -263,20 +269,17 @@ export default function Home() {
               <div className="mt-8">
                 <LineCta href={lineUrl} location="guide" />
               </div>
-              <p className="mt-3 text-center text-xs leading-5 text-white/60">登録後すぐに届きます・追加料金なし</p>
+              <p className="mt-3 text-center text-xs leading-5 text-[#66635C]">登録後すぐに届きます・追加料金なし</p>
             </aside>
           </Container>
         </section>
 
-        <section className="section-space border-y border-black/10 bg-white" aria-labelledby="reason-heading">
+        <section className="border-y border-black/10 bg-white py-14 sm:py-20 lg:py-24" aria-labelledby="reason-heading">
           <Container size="text">
             <SectionHeading id="reason-heading" label="無料公開の理由" title="遠回りした部分まで、まとめて公開します" align="left" />
             <div className="mt-8 space-y-5 text-base leading-[2] text-[#5B5852] sm:text-[18px]">
               <p>私自身、最初はどのAIを使えばいいか分からず、必要のないプランを契約したり、使えない生成に時間や費用を使ったりしました。</p>
               <p>これから始める人には、同じ遠回りをしてほしくありません。そこで、実際に使っている制作手順と、失敗しやすいポイントを無料でまとめました。</p>
-            </div>
-            <div className="mt-8 rounded-[22px] border border-[#6547E8]/20 bg-[#F4F0FF] px-6 py-5 text-sm leading-[1.9] text-[#4F476A] sm:px-7 sm:text-[15px]">
-              紹介するサービスの一部には、アフィリエイトリンクが含まれる場合があります。リンクを経由しても、利用料金が上乗せされることはありません。
             </div>
           </Container>
         </section>

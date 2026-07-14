@@ -55,14 +55,25 @@ export default function HeroVideo() {
           sizes="(max-width: 768px) 82vw, 350px"
         />
       )}
-      <button
-        type="button"
-        onClick={togglePlayback}
-        className="absolute bottom-3 right-3 min-h-11 rounded-full border border-white/20 bg-black/65 px-4 text-xs font-bold text-white backdrop-blur-sm transition-colors hover:bg-black/80 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
-        aria-label={!activated || !playing ? "AI動画を再生する" : "AI動画を一時停止する"}
-      >
-        {!activated || !playing ? "再生" : "一時停止"}
-      </button>
+      {!activated ? (
+        <button
+          type="button"
+          onClick={togglePlayback}
+          className="absolute left-1/2 top-1/2 min-h-14 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-white/30 bg-black/75 px-6 text-sm font-black text-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] backdrop-blur-sm transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70 sm:text-base"
+          aria-label="作例動画を再生する"
+        >
+          ▶ 作例動画を見る
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={togglePlayback}
+          className="absolute bottom-3 right-3 min-h-11 rounded-full border border-white/20 bg-black/65 px-4 text-xs font-bold text-white backdrop-blur-sm transition-colors hover:bg-black/80 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
+          aria-label={playing ? "AI動画を一時停止する" : "AI動画を再生する"}
+        >
+          {playing ? "一時停止" : "再生"}
+        </button>
+      )}
     </div>
   );
 }
