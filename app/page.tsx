@@ -1,5 +1,4 @@
 import Image from "next/image";
-import CheckList from "@/components/CheckList";
 import Container from "@/components/Container";
 import HeroVideo from "@/components/HeroVideo";
 import LineCta from "@/components/LineCta";
@@ -7,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 
 const results = [
   { value: "16,873,128", label: "約1か月の合計閲覧数" },
-  { value: "50万回以上", label: "リール1本あたりの平均閲覧数" },
+  { value: "50万回以上", label: "リール1本あたりの平均閲覧数", note: "※対象期間の投稿本数から算出" },
   { value: "7,637,277", label: "リーチしたアカウント" },
 ];
 
@@ -36,19 +35,37 @@ const steps = [
   },
 ];
 
-const guideItems = [
-  "AI動画の完全版制作ガイド",
-  "実際の操作画面を使った解説動画",
-  "そのまま使えるプロンプト",
-  "使用ツールと設定方法",
-  "失敗しやすいポイントと対処法",
-  "最初の1本が完成するまでの7日間サポート",
+const guideBenefits = [
+  {
+    title: "解説動画",
+    text: "実際の制作手順を、操作画面を見ながら順番に確認できます。",
+    tone: "bg-[#F4F0FF]",
+    icon: "play" as const,
+  },
+  {
+    title: "使用AIツール一覧",
+    text: "実際に使用しているAIと、必要な設定をまとめています。",
+    tone: "bg-[#EEF6FF]",
+    icon: "tools" as const,
+  },
+  {
+    title: "コピペ用プロンプト集",
+    text: "動画内で使用しているプロンプトを、そのまま使える形で受け取れます。",
+    tone: "bg-[#FFF6E8]",
+    icon: "copy" as const,
+  },
+  {
+    title: "制作順チェックリスト",
+    text: "動画を見たあとに迷わないよう、作業の順番を一覧で確認できます。",
+    tone: "bg-[#EFFAF4]",
+    icon: "check" as const,
+  },
 ];
 
 const faqs = [
   {
     question: "本当に無料ですか？",
-    answer: "ガイドと7日間サポートの追加料金はありません。利用するAIサービスによっては、別途有料プランが必要になる場合があります。",
+    answer: "LINE登録後にお渡しする解説動画、使用AIツール一覧、プロンプト集、制作順チェックリスト、7日間サポートはすべて無料です。AI動画を実際に作る際は、利用するAIツールの料金として、選ぶプランによって月額数千円程度かかる場合があります。",
   },
   {
     question: "AI初心者でも作れますか？",
@@ -72,17 +89,51 @@ const faqs = [
   },
 ];
 
-const supportNotes = [
-  "対象は登録後7日以内に制作する最初の動画1本です。",
-  "動画の制作代行、編集代行ではありません。",
-  "内容によって、すべての要望に対応できない場合があります。",
-];
-
 const disclaimers = [
   "本ガイドは、同じ閲覧数や収益を保証するものではありません。",
   "結果は投稿ジャンル、内容、継続期間、各SNSの状況などによって異なります。",
   "AIサービスの料金、仕様、利用可能なモデルは変更される場合があります。",
 ];
+
+type BenefitIconType = (typeof guideBenefits)[number]["icon"];
+
+function BenefitIcon({ type }: { type: BenefitIconType }) {
+  if (type === "play") {
+    return <span className="ml-1 block h-0 w-0 border-y-[8px] border-l-[12px] border-y-transparent border-l-current" />;
+  }
+
+  if (type === "tools") {
+    return (
+      <span className="grid w-8 gap-2">
+        {["left-1", "left-4", "left-2"].map((position) => (
+          <span key={position} className="relative block h-0.5 w-8 bg-current">
+            <span className={`absolute -top-[3px] size-2 rounded-full border-2 border-current bg-white ${position}`} />
+          </span>
+        ))}
+      </span>
+    );
+  }
+
+  if (type === "copy") {
+    return (
+      <span className="relative block size-8">
+        <span className="absolute left-1 top-1 size-5 rounded border-2 border-current" />
+        <span className="absolute bottom-1 right-1 size-5 rounded border-2 border-current bg-white/80" />
+      </span>
+    );
+  }
+
+  return (
+    <span className="grid w-8 gap-1.5">
+      {[0, 1, 2].map((item) => (
+        <span key={item} className="flex items-center gap-1.5">
+          <span className="block h-1.5 w-2.5 -rotate-45 border-b-2 border-l-2 border-current" />
+          <span className="block h-0.5 flex-1 bg-current" />
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export default function Home() {
   const configuredLineUrl = process.env.NEXT_PUBLIC_LINE_URL?.trim();
@@ -132,9 +183,11 @@ export default function Home() {
       </header>
 
       <div id="main-content">
-        <section className="bg-[#F7F5EF] py-10 sm:py-14 lg:py-16">
+        <section className="relative overflow-hidden bg-[#F7F5EF] py-10 sm:py-14 lg:py-16">
+          <div aria-hidden="true" className="pointer-events-none absolute -left-32 -top-40 size-[32rem] rounded-full bg-[#E5DEFF]/55 blur-3xl" />
+          <div aria-hidden="true" className="pointer-events-none absolute right-[8%] top-[18%] size-72 rounded-full bg-[#CFC2FF]/30 blur-3xl" />
           <Container className="grid max-w-[1180px] grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16">
-            <div className="min-w-0 max-w-[730px]">
+            <div className="relative z-10 min-w-0 max-w-[730px]">
               <p className="inline-flex rounded-full border border-[#6547E8]/20 bg-white/80 px-4 py-2 text-[13px] font-bold text-[#4D35B8] sm:text-sm">
                 顔出しなし・撮影なし・専門スキルなし
               </p>
@@ -143,16 +196,18 @@ export default function Home() {
                 <span className="block whitespace-nowrap">Instagramリールが、</span>
                 <span className="mt-1 block lg:flex lg:items-baseline lg:gap-[0.18em] lg:whitespace-nowrap">
                   <span className="block whitespace-nowrap">約1か月で</span>
-                  <span className="block whitespace-nowrap text-[#6547E8]">合計1,687万閲覧。</span>
+                  <span className="relative block w-fit whitespace-nowrap text-[#6547E8] after:absolute after:-bottom-1 after:left-0 after:h-1 after:w-full after:rounded-full after:bg-gradient-to-r after:from-[#6547E8]/45 after:to-transparent">合計1,687万閲覧。</span>
                 </span>
               </h1>
-              <p className="mt-6 text-[18px] font-black leading-[1.75] tracking-[-0.025em] text-[#171717] sm:text-2xl sm:leading-[1.65]">
-                実際に使った制作手順を、<br />
-                プロンプトと操作画面付きで無料公開します。
+              <p className="mt-7 text-[18px] font-black leading-[1.75] tracking-[-0.025em] text-[#171717] sm:text-[22px] sm:leading-[1.7]">
+                使用しているAIも、制作手順も、<br className="sm:hidden" />すべて公開。<br />
+                設定・プロンプト・操作画面まで、<br />
+                実際に使っている形のまままとめました。
               </p>
               <p className="mt-5 max-w-[680px] text-[15px] leading-[1.9] text-[#66635C] sm:text-[17px]">
-                画像生成から動画化・編集・投稿まで、<br />
-                最初の1本を作る順番で解説します。
+                LINEで無料ガイドを受け取れば、<br className="hidden sm:block" />
+                約1か月で合計1,687万閲覧を記録したリールと<br className="hidden sm:block" />
+                ほぼ同じようなAI動画を、自分で作れるようになります。
               </p>
 
               <div className="mt-7 max-w-[560px]">
@@ -166,9 +221,10 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mx-auto w-full max-w-[350px]">
+            <div className="relative z-10 mx-auto w-full max-w-[350px]">
+              <div aria-hidden="true" className="pointer-events-none absolute inset-10 rounded-full bg-[#7B5CFF]/30 blur-3xl" />
               <p className="mb-3 text-center text-xs font-bold tracking-[0.08em] text-[#66635C]">実際に作成したAI動画</p>
-              <HeroVideo />
+              <div className="relative"><HeroVideo /></div>
             </div>
           </Container>
         </section>
@@ -179,7 +235,7 @@ export default function Home() {
               <SectionHeading
                 id="results-heading"
                 label="実際の運用結果"
-                title={<>2026年5月10日〜6月10日の<br />Instagramリール運用実績</>}
+                title={<>2026年5月10日〜6月10日<br />Instagramリール運用実績</>}
                 align="left"
               />
               <p className="mt-6 max-w-[620px] text-base leading-[1.9] text-[#66635C] sm:text-[18px]">
@@ -189,15 +245,17 @@ export default function Home() {
               </p>
               <div className="mt-9 grid grid-cols-1 gap-3">
                 {results.map((result) => (
-                  <div key={result.label} className="flex items-baseline justify-between gap-4 border-b border-black/10 py-4">
-                    <p className="whitespace-nowrap text-[clamp(1.75rem,4vw,2.5rem)] font-black tracking-[-0.04em] text-[#171717]">{result.value}</p>
-                    <p className="text-right text-xs font-bold leading-5 text-[#66635C] lg:text-sm">{result.label}</p>
+                  <div key={result.label} className="flex items-center justify-between gap-4 rounded-[18px] border border-[#6547E8]/10 bg-[#FAF9FF] px-5 py-4 shadow-[0_7px_18px_rgba(23,23,23,0.035)] transition-transform duration-200 hover:-translate-y-0.5">
+                    <p className="whitespace-nowrap text-[clamp(1.75rem,4vw,2.5rem)] font-black tracking-[-0.04em] text-[#4D35B8]">
+                      {result.value}{result.note ? <sup className="ml-0.5 align-super text-xs">※</sup> : null}
+                    </p>
+                    <div className="text-right">
+                      <p className="text-xs font-bold leading-5 text-[#66635C] lg:text-sm">{result.label}</p>
+                      {result.note ? <p className="mt-1 text-[10px] leading-4 text-[#77736B] sm:text-[11px]">{result.note}</p> : null}
+                    </div>
                   </div>
                 ))}
               </div>
-              <p className="mt-4 text-xs leading-6 text-[#66635C] sm:text-[13px]">
-                ※対象期間の投稿本数から算出
-              </p>
             </div>
             <figure className="mx-auto w-full max-w-[470px]">
               <div className="overflow-hidden rounded-[28px] border border-black/10 bg-white p-2 shadow-[0_18px_45px_rgba(23,23,23,0.12)] sm:p-3">
@@ -248,31 +306,29 @@ export default function Home() {
           </Container>
         </section>
 
-        <section className="section-space bg-[#F7F5EF]" aria-labelledby="guide-heading">
-          <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_430px] lg:items-start lg:gap-16">
-            <div className="min-w-0">
-              <SectionHeading id="guide-heading" label="登録特典" title="LINE登録後に受け取れるもの" align="left" />
-              <p className="mt-6 max-w-[620px] text-base leading-[1.9] text-[#66635C] sm:text-[18px]">
-                登録後すぐに、完全版ガイドのURLが自動で届きます。画像の作り方、動画化、編集、投稿までを順番に確認できます。
-              </p>
-              <div className="mt-8">
-                <CheckList items={guideItems} />
-              </div>
+        <section className="section-space border-y border-[#6547E8]/10 bg-[#FAF8FF]" aria-labelledby="guide-heading">
+          <Container>
+            <SectionHeading id="guide-heading" label="LINE登録特典" title={<>使っているAIも、制作手順も、<br className="hidden sm:block" />すべて公開</>} />
+            <p className="mx-auto mt-6 max-w-[820px] text-center text-base leading-[1.9] text-[#66635C] sm:text-[18px]">
+              一部のコツだけではありません。<br className="hidden sm:block" />
+              実際に使用しているAI、設定、プロンプト、操作画面を含め、<br className="hidden sm:block" />
+              普段行っている制作手順を最初から最後までまとめています。
+            </p>
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              {guideBenefits.map((benefit) => (
+                <article key={benefit.title} className={`rounded-[24px] border border-black/10 p-6 shadow-[0_10px_24px_rgba(23,23,23,0.05)] transition-transform duration-200 hover:-translate-y-1 sm:p-7 ${benefit.tone}`}>
+                  <span aria-hidden="true" className="grid size-14 place-items-center rounded-2xl border border-white/80 bg-white/75 text-[#6547E8] shadow-sm">
+                    <BenefitIcon type={benefit.icon} />
+                  </span>
+                  <h3 className="mt-5 text-lg font-black tracking-[-0.02em] text-[#171717] sm:text-xl">{benefit.title}</h3>
+                  <p className="mt-3 text-sm leading-[1.8] text-[#66635C] sm:text-[15px]">{benefit.text}</p>
+                </article>
+              ))}
             </div>
-            <aside className="rounded-[28px] border border-black/10 bg-[#F4F0FF] p-7 text-[#171717] shadow-[0_12px_30px_rgba(23,23,23,0.07)] sm:p-9 lg:mt-16" aria-label="完全版ガイドの概要">
-              <p className="text-xs font-bold tracking-[0.12em] text-[#6547E8]">ガイドの流れ</p>
-              <h3 className="mt-4 text-2xl font-black leading-[1.5] sm:text-3xl">迷わず進めるための<br />制作ロードマップ</h3>
-              <ol className="mt-7 space-y-4 border-l border-black/10 pl-5 text-sm leading-7 text-[#66635C] sm:text-base">
-                <li>画像を作る</li>
-                <li>AIで動きを付ける</li>
-                <li>音声・字幕を整える</li>
-                <li>投稿用に書き出す</li>
-              </ol>
-              <div className="mt-8">
-                <LineCta href={lineUrl} location="guide" />
-              </div>
-              <p className="mt-3 text-center text-xs leading-5 text-[#66635C]">登録後すぐに届きます・追加料金なし</p>
-            </aside>
+            <div className="mx-auto mt-10 max-w-[560px]">
+              <LineCta href={lineUrl} location="guide" />
+              <p className="mt-4 text-center text-xs leading-6 text-[#66635C] sm:text-sm">解説動画・ツール一覧・プロンプト集・チェックリストはすべて無料です。</p>
+            </div>
           </Container>
         </section>
 
@@ -287,27 +343,21 @@ export default function Home() {
         </section>
 
         <section className="section-space bg-[#F7F5EF]" aria-labelledby="support-heading">
-          <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start lg:gap-16">
-            <div className="min-w-0">
-              <SectionHeading id="support-heading" label="7日間サポート" title="最初の1本を完成させるための、7日間サポート" align="left" />
-              <p className="mt-7 text-base leading-[1.95] text-[#66635C] sm:text-[18px]">
-                登録後7日以内に作る最初の動画1本について、テーマ、構成、冒頭の見せ方、テロップ、生成結果、完成動画の改善点をLINEで相談できます。
-              </p>
-              <p className="mt-6 border-l-[3px] border-[#6547E8] pl-5 text-lg font-black leading-[1.8] text-[#171717] sm:text-xl">
-                作り方を読むだけで終わらず、最初の1本を完成させるところまで進めてもらうためのサポートです。
-              </p>
-            </div>
-            <aside className="rounded-[24px] border border-black/10 bg-white p-6 sm:p-8" aria-label="7日間サポートの対象範囲">
-              <p className="text-base font-black text-[#171717]">サポートの対象範囲</p>
-              <ul className="mt-5 space-y-4 text-sm leading-[1.8] text-[#5F5C56] sm:text-[15px]">
-                {supportNotes.map((note) => (
-                  <li key={note} className="flex gap-3">
-                    <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-[#6547E8]" />
-                    <span>{note}</span>
-                  </li>
-                ))}
-              </ul>
-            </aside>
+          <Container size="text">
+            <SectionHeading id="support-heading" label="7日間サポート" title="最初の1本を完成させるための、7日間サポート" align="left" />
+            <p className="mt-7 text-base leading-[1.95] text-[#66635C] sm:text-[18px]">
+              登録後7日以内に作る最初の動画1本について、テーマ、構成、冒頭の見せ方、テロップ、生成結果、完成動画の改善点をLINEで相談できます。
+            </p>
+            <p className="mt-6 border-l-[3px] border-[#6547E8] pl-5 text-lg font-black leading-[1.8] text-[#171717] sm:text-xl">
+              作り方を読むだけで終わらず、最初の1本を完成させるところまで進めてもらうためのサポートです。
+            </p>
+            <p className="mt-6 text-sm leading-7 text-[#66635C] sm:text-[15px]">
+              対象は、登録後7日以内に制作する最初の動画1本です。<br />
+              動画の制作代行・編集代行ではありません。
+            </p>
+            <p className="mt-6 rounded-r-[16px] border-l-4 border-[#6547E8] bg-[#F0ECFF] px-5 py-4 text-sm font-bold leading-7 text-[#4F476A] sm:text-[15px]">
+              ※7日間サポートは、対応可能人数に達した場合は受付を終了します。
+            </p>
           </Container>
         </section>
 
@@ -330,7 +380,7 @@ export default function Home() {
           </Container>
         </section>
 
-        <section className="bg-[#171717] py-16 text-white sm:py-24" aria-labelledby="final-heading">
+        <section className="bg-gradient-to-br from-[#241747] to-[#6547E8] py-16 text-white sm:py-24" aria-labelledby="final-heading">
           <Container size="text" className="text-center">
             <p className="text-sm font-bold text-[#B8A9FF]">完全版ガイド＋7日間サポート</p>
             <h2 id="final-heading" className="mt-4 text-[2.15rem] font-black leading-[1.25] tracking-[-0.04em] sm:text-5xl">まずは1本、完成させる。</h2>
