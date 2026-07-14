@@ -7,7 +7,7 @@ import SectionHeading from "@/components/SectionHeading";
 
 const results = [
   { value: "16,873,128", label: "約1か月の合計閲覧数" },
-  { value: "1本あたり平均50万回以上", label: "Instagramリールの平均閲覧数", compact: true },
+  { value: "50万回以上", label: "リール1本あたりの平均閲覧数" },
   { value: "7,637,277", label: "リーチしたアカウント" },
 ];
 
@@ -138,11 +138,13 @@ export default function Home() {
               <p className="inline-flex rounded-full border border-[#6547E8]/20 bg-white/80 px-4 py-2 text-[13px] font-bold text-[#4D35B8] sm:text-sm">
                 顔出しなし・撮影なし・専門スキルなし
               </p>
-              <h1 className="mt-5 text-[clamp(2rem,8.8vw,3.75rem)] font-black leading-[1.16] tracking-[-0.05em] text-[#171717]">
+              <h1 className="mt-5 text-[clamp(2rem,8.8vw,3.75rem)] font-black leading-[1.16] tracking-[-0.05em] text-[#171717] lg:text-[clamp(2.25rem,3.4vw,3rem)]">
                 <span className="block whitespace-nowrap">AIを使って作った</span>
                 <span className="block whitespace-nowrap">Instagramリールが、</span>
-                <span className="mt-1 block whitespace-nowrap">約1か月で</span>
-                <span className="block whitespace-nowrap text-[#6547E8]">合計1,687万閲覧。</span>
+                <span className="mt-1 block lg:flex lg:items-baseline lg:gap-[0.18em] lg:whitespace-nowrap">
+                  <span className="block whitespace-nowrap">約1か月で</span>
+                  <span className="block whitespace-nowrap text-[#6547E8]">合計1,687万閲覧。</span>
+                </span>
               </h1>
               <p className="mt-6 text-[18px] font-black leading-[1.75] tracking-[-0.025em] text-[#171717] sm:text-2xl sm:leading-[1.65]">
                 実際に使った制作手順を、<br />
@@ -185,16 +187,16 @@ export default function Home() {
                 合計閲覧数は<span className="whitespace-nowrap font-bold text-[#6547E8]">16,873,128</span>。<br />
                 リーチしたアカウントは<span className="whitespace-nowrap font-bold text-[#171717]">7,637,277</span>でした。
               </p>
-              <div className="mt-9 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
+              <div className="mt-9 grid grid-cols-1 gap-3">
                 {results.map((result) => (
-                  <div key={result.label} className="flex items-baseline justify-between gap-4 border-b border-black/10 py-4 sm:block lg:flex">
-                    <p className={`whitespace-nowrap font-black tracking-[-0.04em] text-[#171717] ${result.compact ? "text-[clamp(1.35rem,2.6vw,2rem)]" : "text-[clamp(1.75rem,4vw,2.5rem)]"}`}>{result.value}</p>
-                    <p className="text-right text-xs font-bold leading-5 text-[#66635C] sm:mt-2 sm:text-left lg:mt-0 lg:text-right lg:text-sm">{result.label}</p>
+                  <div key={result.label} className="flex items-baseline justify-between gap-4 border-b border-black/10 py-4">
+                    <p className="whitespace-nowrap text-[clamp(1.75rem,4vw,2.5rem)] font-black tracking-[-0.04em] text-[#171717]">{result.value}</p>
+                    <p className="text-right text-xs font-bold leading-5 text-[#66635C] lg:text-sm">{result.label}</p>
                   </div>
                 ))}
               </div>
               <p className="mt-4 text-xs leading-6 text-[#66635C] sm:text-[13px]">
-                閲覧の99.1%はフォロワー以外からでした。
+                ※対象期間の投稿本数から算出
               </p>
             </div>
             <figure className="mx-auto w-full max-w-[470px]">
@@ -257,8 +259,8 @@ export default function Home() {
                 <CheckList items={guideItems} />
               </div>
             </div>
-            <aside className="rounded-[28px] border border-black/10 bg-[#F4F0FF] p-7 text-[#171717] shadow-[0_12px_30px_rgba(23,23,23,0.07)] sm:p-9 lg:mt-8" aria-label="完全版ガイドの概要">
-              <p className="text-xs font-bold tracking-[0.12em] text-[#6547E8]">無料ガイドの内容</p>
+            <aside className="rounded-[28px] border border-black/10 bg-[#F4F0FF] p-7 text-[#171717] shadow-[0_12px_30px_rgba(23,23,23,0.07)] sm:p-9 lg:mt-16" aria-label="完全版ガイドの概要">
+              <p className="text-xs font-bold tracking-[0.12em] text-[#6547E8]">ガイドの流れ</p>
               <h3 className="mt-4 text-2xl font-black leading-[1.5] sm:text-3xl">迷わず進めるための<br />制作ロードマップ</h3>
               <ol className="mt-7 space-y-4 border-l border-black/10 pl-5 text-sm leading-7 text-[#66635C] sm:text-base">
                 <li>画像を作る</li>
@@ -278,7 +280,7 @@ export default function Home() {
           <Container size="text">
             <SectionHeading id="reason-heading" label="無料公開の理由" title="遠回りした部分まで、まとめて公開します" align="left" />
             <div className="mt-8 space-y-5 text-base leading-[2] text-[#5B5852] sm:text-[18px]">
-              <p>私自身、最初はどのAIを使えばいいか分からず、必要のないプランを契約したり、使えない生成に時間や費用を使ったりしました。</p>
+              <p>私自身、最初はどのAIを使えばいいか分からず、必要のないプランを契約したり、思うような動画が作れず、何度も生成をやり直したりしました。</p>
               <p>これから始める人には、同じ遠回りをしてほしくありません。そこで、実際に使っている制作手順と、失敗しやすいポイントを無料でまとめました。</p>
             </div>
           </Container>
@@ -287,7 +289,7 @@ export default function Home() {
         <section className="section-space bg-[#F7F5EF]" aria-labelledby="support-heading">
           <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start lg:gap-16">
             <div className="min-w-0">
-              <SectionHeading id="support-heading" label="7日間サポート" title="見るだけで終わらせないための、7日間サポート" align="left" />
+              <SectionHeading id="support-heading" label="7日間サポート" title="最初の1本を完成させるための、7日間サポート" align="left" />
               <p className="mt-7 text-base leading-[1.95] text-[#66635C] sm:text-[18px]">
                 登録後7日以内に作る最初の動画1本について、テーマ、構成、冒頭の見せ方、テロップ、生成結果、完成動画の改善点をLINEで相談できます。
               </p>
