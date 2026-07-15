@@ -55,20 +55,20 @@ const prompts = [
 
 export default function GuidePage() {
   return (
-    <main className="min-h-screen bg-[#F7F6F2]">
+    <main className="min-h-screen bg-[#F7F7F7]">
       <a
         href="#guide-content"
-        className="sr-only z-50 rounded-xl bg-white px-4 py-3 font-bold text-[#151515] focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-50 rounded-lg bg-white px-4 py-3 font-bold text-[#111111] shadow-sm focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         本文へ移動
       </a>
 
-      <header className="border-b border-black/10 bg-[#F7F6F2]">
+      <header className="border-b border-[#E5E7EB] bg-white">
         <Container className="flex min-h-16 items-center justify-between gap-4 py-3 sm:min-h-[72px]">
-          <p className="text-[15px] font-black tracking-[-0.02em] text-[#151515] sm:text-base">
+          <p className="text-[15px] font-black tracking-[-0.02em] text-[#111111] sm:text-base">
             AI動画無料ガイド
           </p>
-          <p className="shrink-0 rounded-full bg-[#28345C] px-3 py-1.5 text-[11px] font-black tracking-[0.05em] text-white sm:px-4 sm:text-xs">
+          <p className="shrink-0 rounded-full bg-[#111827] px-3 py-1.5 text-[11px] font-black tracking-[0.05em] text-white sm:px-4 sm:text-xs">
             LINE登録者限定
           </p>
         </Container>
@@ -78,16 +78,16 @@ export default function GuidePage() {
         <section className="relative overflow-hidden px-0 pb-12 pt-10 sm:pb-16 sm:pt-14">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -left-32 -top-40 size-[30rem] rounded-full bg-[#E4E7EF]/70 blur-3xl"
+            className="pointer-events-none absolute -left-32 -top-40 size-[30rem] rounded-full bg-[#E5E7EB]/65 blur-3xl"
           />
           <Container className="relative max-w-[880px] text-center">
-            <p className="text-xs font-black tracking-[0.14em] text-[#E85A2A]">
+            <p className="text-xs font-bold tracking-[0.14em] text-[#6B7280]">
               COMPLETE GUIDE
             </p>
-            <h1 className="mt-3 text-[clamp(2rem,8vw,3.5rem)] font-black leading-[1.2] tracking-[-0.045em] text-[#151515]">
+            <h1 className="mt-3 text-[clamp(2rem,8vw,3.5rem)] font-black leading-[1.2] tracking-[-0.045em] text-[#111111]">
               AI動画 完全版無料ガイド
             </h1>
-            <p className="mx-auto mt-5 max-w-[680px] text-sm leading-[1.9] text-[#6B6862] sm:text-lg">
+            <p className="mx-auto mt-5 max-w-[680px] text-sm leading-[1.9] text-[#666666] sm:text-lg">
               動画を見ながら、必要なプロンプトを下からコピーして使用してください。
             </p>
           </Container>
@@ -98,7 +98,7 @@ export default function GuidePage() {
             <h2 id="guide-video-heading" className="sr-only">
               AI動画完全版ガイド動画
             </h2>
-            <div className="overflow-hidden rounded-[20px] border border-black/10 bg-[#151515] shadow-[0_18px_45px_rgba(21,21,21,0.16)] sm:rounded-[28px]">
+            <div className="overflow-hidden rounded-[16px] border border-[#E5E7EB] bg-black shadow-sm sm:rounded-[20px]">
               <div className="aspect-video">
                 <iframe
                   className="h-full w-full"
@@ -113,18 +113,18 @@ export default function GuidePage() {
           </Container>
         </section>
 
-        <section className="border-y border-black/10 bg-white py-14 sm:py-20" aria-labelledby="prompts-heading">
+        <section className="border-y border-[#E5E7EB] bg-[#F7F7F7] py-14 sm:py-20" aria-labelledby="prompts-heading">
           <Container className="max-w-[880px]">
             <div className="text-center">
-              <p className="text-xs font-black tracking-[0.14em] text-[#E85A2A]">
+              <p className="text-xs font-bold tracking-[0.14em] text-[#6B7280]">
                 COPY &amp; PASTE
               </p>
-              <h2 id="prompts-heading" className="mt-3 text-[28px] font-black tracking-[-0.035em] text-[#151515] sm:text-[38px]">
+              <h2 id="prompts-heading" className="mt-3 text-[28px] font-black tracking-[-0.035em] text-[#111111] sm:text-[38px]">
                 コピペ用プロンプト
               </h2>
             </div>
 
-            <div className="mt-9 grid gap-6 sm:mt-12 sm:gap-8">
+            <div className="mt-9 grid gap-5 sm:mt-12 sm:gap-6">
               {prompts.map((prompt) => (
                 <PromptCard key={prompt.step} {...prompt} />
               ))}
@@ -134,15 +134,16 @@ export default function GuidePage() {
 
         <section className="py-14 sm:py-20" aria-labelledby="support-heading">
           <Container className="max-w-[880px]">
-            <div className="relative overflow-hidden rounded-[24px] bg-[#28345C] px-6 py-9 text-white shadow-[0_14px_38px_rgba(40,52,92,0.18)] sm:rounded-[28px] sm:px-10 sm:py-11">
-              <div aria-hidden="true" className="absolute -right-16 -top-20 size-64 rounded-full border border-white/15" />
-              <p className="relative text-xs font-black tracking-[0.12em] text-[#E1C58E]">
-                7 DAYS SUPPORT
-              </p>
-              <h2 id="support-heading" className="relative mt-3 text-[25px] font-black leading-[1.45] tracking-[-0.03em] sm:text-[34px]">
-                最初の1本が完成するまで7日間サポート
-              </h2>
-              <p className="relative mt-5 max-w-[700px] text-sm leading-[1.9] text-white/85 sm:text-base">
+            <div className="rounded-[18px] border border-[#E5E7EB] bg-white px-6 py-9 shadow-sm sm:rounded-[20px] sm:px-10 sm:py-11">
+              <div className="flex flex-wrap items-center gap-3">
+                <h2 id="support-heading" className="text-[25px] font-black leading-[1.45] tracking-[-0.03em] text-[#111111] sm:text-[34px]">
+                  最初の1本が完成するまで7日間サポート
+                </h2>
+                <span className="shrink-0 rounded-full border border-[#E5E7EB] bg-[#F3F4F6] px-3 py-1.5 text-[11px] font-bold text-[#6B7280] sm:text-xs">
+                  7日間サポート
+                </span>
+              </div>
+              <p className="mt-5 max-w-[700px] text-sm leading-[1.9] text-[#666666] sm:text-base">
                 登録日から7日間、最初の動画1本について質問できます。
                 <br className="hidden sm:block" />
                 分からない画面や生成結果を、LINEのトークに送ってください。
@@ -152,9 +153,9 @@ export default function GuidePage() {
         </section>
       </div>
 
-      <footer className="border-t border-black/10 bg-white py-8">
+      <footer className="border-t border-[#E5E7EB] bg-white py-8">
         <Container className="max-w-[880px]">
-          <p className="text-center text-xs leading-[1.9] text-[#6B6862] sm:text-sm">
+          <p className="text-center text-xs leading-[1.9] text-[#666666] sm:text-sm">
             このページはLINE登録者向けの限定ガイドです。
             <br />
             URLおよび内容の無断転載・再配布はご遠慮ください。
