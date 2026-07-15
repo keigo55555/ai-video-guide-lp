@@ -7,7 +7,6 @@ import SectionHeading from "@/components/SectionHeading";
 const results = [
   { value: "16,873,128", label: "合計再生数" },
   { value: "7,637,277", label: "リーチしたアカウント" },
-  { value: "99.1%", label: "フォロワー以外" },
   { value: "50万回以上", label: "全投稿動画の平均再生数", note: "※公開しているすべての動画から算出" },
 ];
 
@@ -16,6 +15,13 @@ const concerns = [
   "撮影する時間や機材がない",
   "何から始めればいいか分からない",
   "AIの操作が難しそう",
+];
+
+const aiVideoUses = [
+  "SNSへ継続的に動画を投稿する",
+  "顔出しせずに自分のテーマを発信する",
+  "商品やサービスを動画で紹介する",
+  "アイデアを短い動画として形にする",
 ];
 
 const guideBenefits = [
@@ -254,6 +260,23 @@ export default function Home() {
               ))}
             </div>
             <p className="mx-auto mt-9 max-w-[760px] text-center text-base font-medium leading-[1.9] text-[#6B6862] sm:text-lg">AIを使った制作の順番と実際の設定が分かれば、最初の1本を形にできます。</p>
+          </Container>
+        </section>
+
+        <section className="border-y border-black/10 bg-white py-14 sm:py-16 lg:py-20" aria-labelledby="uses-heading">
+          <Container>
+            <SectionHeading id="uses-heading" label="AI動画でできること" title="顔出しや撮影なしでも動画発信を続けられる" />
+            <p className="mx-auto mt-6 max-w-[880px] text-center text-base leading-[1.9] text-[#6B6862] sm:text-[18px]">
+              AI動画が作れるようになれば、自分で撮影をしなくてもInstagramリールやTikTok、YouTubeショートへ動画を投稿できます。自分のアカウントでの発信だけでなく、商品やサービスの紹介、伝えたいテーマの動画化など、さまざまな用途に活用できます。
+            </p>
+            <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+              {aiVideoUses.map((use) => (
+                <li key={use} className="flex items-start gap-3 rounded-[20px] border border-black/10 bg-[#F7F6F2] px-5 py-5 shadow-[0_6px_16px_rgba(21,21,21,0.035)] sm:px-6">
+                  <span aria-hidden="true" className="mt-[0.55em] size-2.5 shrink-0 rounded-full bg-[#28345C]" />
+                  <span className="text-[15px] font-bold leading-[1.75] text-[#151515] sm:text-base">{use}</span>
+                </li>
+              ))}
+            </ul>
           </Container>
         </section>
 
