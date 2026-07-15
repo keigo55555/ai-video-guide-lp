@@ -5,9 +5,10 @@ import LineCta from "@/components/LineCta";
 import SectionHeading from "@/components/SectionHeading";
 
 const results = [
-  { value: "16,873,128", label: "約1か月の合計再生数" },
-  { value: "50万回以上", label: "投稿動画1本あたりの平均再生数", note: "※対象期間に投稿したすべての動画から算出" },
+  { value: "16,873,128", label: "合計再生数" },
   { value: "7,637,277", label: "リーチしたアカウント" },
+  { value: "99.1%", label: "フォロワー以外" },
+  { value: "50万回以上", label: "全投稿動画の平均再生数", note: "※公開しているすべての動画から算出" },
 ];
 
 const concerns = [
@@ -21,7 +22,7 @@ const guideBenefits = [
   {
     title: "解説動画",
     text: "実際の制作手順を 操作画面を見ながら順番に確認できます。",
-    tone: "bg-[#EEF0F6]",
+    tone: "bg-white",
     icon: "play" as const,
   },
   {
@@ -54,8 +55,8 @@ const faqs = [
     answer: "初めての人が順番に進められるように、操作画面、設定、入力する文章まで具体的に説明します。",
   },
   {
-    question: "スマホだけでも作れますか？",
-    answer: "スマホで進められる部分もありますが、画像や動画素材の管理を考えると、PCを併用した方がスムーズです。",
+    question: "スマホだけでもできますか？",
+    answer: "一部の作業はスマホだけでも進められますが、画像や動画素材の管理はPCを使った方がスムーズです。",
   },
   {
     question: "同じ再生数を出せますか？",
@@ -63,7 +64,7 @@ const faqs = [
   },
   {
     question: "どのAIを使いますか？",
-    answer: "実際に画像生成や動画化で使用しているAIと、必要な設定をガイド内で説明します。サービスの料金や仕様は変更される場合があります。",
+    answer: "画像生成AIと動画生成AIを使用します。実際に使っているAIと設定はガイド内で紹介します。",
   },
   {
     question: "7日間サポートでは何を相談できますか？",
@@ -177,20 +178,20 @@ export default function Home() {
                 <span className="block whitespace-nowrap">AIを使って作った</span>
                 <span className="block whitespace-nowrap">Instagramリールが</span>
                 <span className="mt-1 block lg:flex lg:items-baseline lg:gap-[0.18em] lg:whitespace-nowrap">
-                  <span className="block whitespace-nowrap">約1か月で</span>
+                  <span className="block whitespace-nowrap">1か月で</span>
                   <span className="block w-fit whitespace-nowrap text-[#28345C]">合計1,687万再生</span>
                 </span>
               </h1>
-              <p className="mt-7 text-[18px] font-black leading-[1.75] tracking-[-0.025em] text-[#151515] sm:text-[22px] sm:leading-[1.7]">
-                使っているAIも制作手順もすべて公開<br />
-                設定・プロンプト・操作画面まで<br />
-                実際に使っている内容を<br className="sm:hidden" />そのまままとめました
-              </p>
-              <p className="mt-5 max-w-[680px] text-[15px] leading-[1.9] text-[#6B6862] sm:text-[17px]">
-                LINEで無料ガイドを受け取れば<br />
-                実際に投稿しているリールとほぼ同じ流れで<br />
-                AI動画を自分で作れます
-              </p>
+              <div className="mt-7 grid gap-0 text-[17px] font-bold leading-[1.55] tracking-[-0.025em] text-[#151515] sm:text-[21px]">
+                <span className="block">使っているAIも制作手順もすべて公開</span>
+                <span className="block">設定・プロンプト・操作画面まで</span>
+                <span className="block">実際に使っている内容をそのまままとめました</span>
+              </div>
+              <div className="mt-8 grid max-w-[680px] gap-0 text-[15px] font-normal leading-[1.85] text-[#6B6862] sm:text-[17px]">
+                <span className="block">LINEで無料ガイドを受け取れば</span>
+                <span className="block">実際に投稿しているリールとほぼ同じ流れで</span>
+                <span className="block">AI動画を自分で作れます</span>
+              </div>
 
               <div className="mt-7 max-w-[560px]">
                 <LineCta href={lineUrl} location="hero" />
@@ -221,8 +222,8 @@ export default function Home() {
                 align="left"
               />
               <p className="mt-6 max-w-[620px] text-base leading-[1.9] text-[#6B6862] sm:text-[18px]">
-                AIを使って作ったInstagramリールの<br />
-                合計再生数は<span className="whitespace-nowrap font-bold text-[#28345C]">16,873,128</span>。<br />
+                AIを使って作ったInstagramリールは、2026年5月10日〜6月10日の1か月で
+                合計<span className="whitespace-nowrap font-bold text-[#28345C]">16,873,128再生</span>。
                 リーチしたアカウントは<span className="whitespace-nowrap font-bold text-[#151515]">7,637,277</span>でした。
               </p>
               <div className="mt-9 grid grid-cols-1 gap-3">
@@ -246,6 +247,7 @@ export default function Home() {
                   alt="2026年5月10日から6月10日のInstagramインサイト元画像"
                   width={1206}
                   height={1711}
+                  loading="eager"
                   className="h-auto w-full rounded-[20px] object-contain"
                   sizes="(max-width: 768px) 92vw, 470px"
                 />
@@ -256,7 +258,7 @@ export default function Home() {
 
         <section className="section-space bg-[#F7F6F2]" aria-labelledby="concerns-heading">
           <Container>
-            <SectionHeading id="concerns-heading" label="始められない理由" title="こんな理由で動画発信を止めていませんか？" />
+            <SectionHeading id="concerns-heading" label="始められない理由" title={<>こんな理由で動画発信を止めて<span className="whitespace-nowrap">いませんか？</span></>} />
             <div className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-5">
               {concerns.map((concern) => (
                 <div key={concern} className="rounded-[22px] border border-black/10 bg-white px-5 py-6 sm:px-6 sm:py-7">
@@ -265,20 +267,14 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="mx-auto mt-10 max-w-[760px] text-center text-base font-medium leading-[2] text-[#6B6862] sm:text-lg">
-              必要なのは、出演者や高価な撮影機材ではありません。<br className="hidden sm:block" />
-              AIを使った制作の順番と実際の設定が分かれば、最初の1本を形にできます。
-            </p>
+            <p className="mx-auto mt-9 max-w-[760px] text-center text-base font-medium leading-[1.9] text-[#6B6862] sm:text-lg">AIを使った制作の順番と実際の設定が分かれば、最初の1本を形にできます。</p>
           </Container>
         </section>
 
         <section className="section-space border-y border-black/10 bg-[#EEF0F6]" aria-labelledby="guide-heading">
           <Container>
             <SectionHeading id="guide-heading" label="LINE登録特典" title="使っているAIも制作手順もすべて公開" />
-            <p className="mx-auto mt-6 max-w-[820px] text-center text-base leading-[1.9] text-[#6B6862] sm:text-[18px]">
-              実際に使っているAI・設定・プロンプト・操作画面を<br className="hidden sm:block" />
-              制作手順とあわせてすべて公開します。
-            </p>
+            <p className="mx-auto mt-6 max-w-[820px] text-center text-base leading-[1.9] text-[#6B6862] sm:text-[18px]">実際に使っているAI・設定・プロンプト・操作画面を、制作手順とあわせてすべて公開します。</p>
             <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {guideBenefits.map((benefit) => (
                 <article key={benefit.title} className={`rounded-[24px] border border-[#28345C]/15 p-6 shadow-[0_8px_20px_rgba(21,21,21,0.045)] transition-transform duration-200 hover:-translate-y-0.5 sm:p-7 ${benefit.tone}`}>
@@ -292,17 +288,18 @@ export default function Home() {
             </div>
             <div className="mx-auto mt-10 max-w-[560px]">
               <LineCta href={lineUrl} location="guide" />
-              <p className="mt-4 text-center text-xs leading-6 text-[#6B6862] sm:text-sm">解説動画・ツール一覧・プロンプト集・チェックリストはすべて無料です。</p>
+              <p className="mt-4 text-center text-xs leading-6 text-[#6B6862] sm:text-sm">解説動画・使用AIツール一覧・プロンプト集・制作順チェックリストはすべて無料です。</p>
             </div>
           </Container>
         </section>
 
-        <section className="border-y border-black/10 bg-white py-14 sm:py-20 lg:py-24" aria-labelledby="reason-heading">
+        <section className="section-space border-y border-black/10 bg-white" aria-labelledby="reason-heading">
           <Container size="text">
-            <SectionHeading id="reason-heading" label="無料公開の理由" title="遠回りした部分もすべて公開" align="left" />
-            <div className="mt-8 space-y-5 text-base leading-[2] text-[#6B6862] sm:text-[18px]">
-              <p>私自身、最初はどのAIを使えばいいか分からず、必要のないプランを契約したり、思うような動画が作れず、何度も生成をやり直したりしました。</p>
-              <p>これから始める人には、同じ遠回りをしてほしくありません。そこで、実際に使っている制作手順と、失敗しやすいポイントを無料でまとめました。</p>
+            <SectionHeading id="reason-heading" label="無料公開の理由" title="同じ遠回りをしてほしくないから" align="left" />
+            <div className="mt-8 max-w-[780px] space-y-5 text-base leading-[1.9] text-[#6B6862] sm:text-[18px]">
+              <p>私自身、最初はどのAIを選べばいいのか分からず、必要のないプランを契約したり、設定が分からないまま何度も生成をやり直したりしました。情報を探しても断片的なものが多く、実際に動画を作るまでの流れを理解するのに時間も費用もかかりました。</p>
+              <p>これから始める人には、同じところで迷ってほしくありません。そこで、実際に使っているAI・設定・プロンプト・操作画面・制作手順をひとつにまとめました。何を使い、どの順番で進めればいいのかを最初から確認できる内容にしています。</p>
+              <p>無料で公開する理由は、知識だけを受け取って終わるのではなく、実際に最初の1本を作れるところまで進んでもらいたいからです。</p>
             </div>
           </Container>
         </section>
@@ -311,15 +308,12 @@ export default function Home() {
           <Container size="text">
             <SectionHeading id="support-heading" label="7日間サポート" title="最初の1本を完成させるための7日間サポート" align="left" />
             <p className="mt-7 text-base leading-[1.95] text-[#6B6862] sm:text-[18px]">
-              登録後7日以内に作る最初の動画1本について、使用する画像、AIの設定、プロンプト、生成結果など、制作途中で迷った点をLINEで相談できます。
+              登録後7日以内に作る最初の動画1本について、画像生成、AIの設定、プロンプト、生成結果、制作中に起きた問題をLINEで相談できます。
             </p>
             <p className="mt-6 border-l-[3px] border-[#28345C] pl-5 text-lg font-black leading-[1.8] text-[#151515] sm:text-xl">
               ガイドを読むだけで終わらず 最初の1本を完成させるためのサポートです
             </p>
-            <p className="mt-6 text-sm leading-7 text-[#6B6862] sm:text-[15px]">
-              対象は登録後7日以内に制作する 最初の動画1本です。<br />
-              動画の制作代行ではありません。
-            </p>
+            <p className="mt-6 text-sm leading-7 text-[#6B6862] sm:text-[15px]">※サポート対象は登録後7日以内に作る最初の1本です。動画の制作代行ではありません。</p>
             <p className="mt-6 rounded-r-[16px] border-l-[3px] border-[#28345C]/55 bg-[#EEF0F6] px-5 py-4 text-sm leading-7 text-[#5E6270] sm:text-[15px]">
               ※7日間サポートは、対応可能人数に達した場合は受付を終了します。
             </p>
@@ -345,7 +339,10 @@ export default function Home() {
           </Container>
         </section>
 
-        <section className="bg-[#202945] py-16 text-white sm:py-24" aria-labelledby="final-heading">
+        <section className="relative overflow-hidden bg-[#202945] py-14 text-white sm:py-20" aria-labelledby="final-heading">
+          <span aria-hidden="true" className="pointer-events-none absolute -left-20 -top-24 size-64 rounded-full border border-[#C6A46A]/20" />
+          <span aria-hidden="true" className="pointer-events-none absolute -bottom-20 right-[8%] size-52 rounded-full border border-[#C6A46A]/15" />
+          <span aria-hidden="true" className="pointer-events-none absolute right-[12%] top-12 h-px w-28 bg-[#C6A46A]/25" />
           <Container size="text" className="text-center">
             <p className="text-sm font-bold text-white/70">完全版ガイド＋7日間サポート</p>
             <h2 id="final-heading" className="mt-4 text-[2.15rem] font-black leading-[1.25] tracking-[-0.04em] sm:text-5xl">まずは1本完成させる</h2>
@@ -354,11 +351,12 @@ export default function Home() {
             </p>
             <div className="mx-auto mt-9 max-w-[560px]">
               <LineCta href={lineUrl} location="final" />
-              <div className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs leading-6 text-white/60 sm:text-[13px]">
-                <span>登録後すぐに届きます</span>
+              <p className="mt-4 text-sm font-bold text-white/85">登録後すぐに完全版ガイドを受け取れます</p>
+              <div className="mt-2 flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs leading-6 text-white/65 sm:text-[13px]">
+                <span>7日間サポート付き</span>
                 <span>ガイドは無料です</span>
-                <span>最初の1本まで<span className="whitespace-nowrap">7日間サポート</span></span>
               </div>
+              <p className="mt-2 text-[11px] leading-5 text-white/55 sm:text-xs">※同じ再生数や成果を保証するものではありません。</p>
             </div>
           </Container>
         </section>
