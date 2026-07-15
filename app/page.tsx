@@ -138,7 +138,7 @@ export default function Home() {
   };
 
   return (
-    <main className="overflow-x-clip">
+    <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -174,13 +174,8 @@ export default function Home() {
               <p className="inline-flex rounded-full border border-[#28345C]/15 bg-white/85 px-4 py-2 text-[13px] font-bold text-[#28345C] sm:text-sm">
                 顔出しなし・撮影なし・専門スキルなし
               </p>
-              <h1 className="mt-5 text-[clamp(1.625rem,8.25vw,3.75rem)] font-black leading-[1.16] tracking-[-0.05em] text-[#151515] lg:text-[clamp(2.25rem,3.4vw,3rem)]">
-                <span className="block whitespace-nowrap">AIを使って作った</span>
-                <span className="block whitespace-nowrap">Instagramリールが</span>
-                <span className="mt-1 block lg:flex lg:items-baseline lg:gap-[0.18em] lg:whitespace-nowrap">
-                  <span className="block whitespace-nowrap">1か月で</span>
-                  <span className="block w-fit whitespace-nowrap text-[#28345C]">合計1,687万再生</span>
-                </span>
+              <h1 className="mt-5 max-w-[730px] text-[clamp(1.625rem,8.25vw,3.75rem)] font-black leading-[1.16] tracking-[-0.05em] text-[#151515] lg:text-[clamp(2.25rem,3.4vw,3rem)]">
+                AIを使って作ったInstagramリールが1か月で<span className="whitespace-nowrap bg-[linear-gradient(transparent_72%,rgba(232,90,42,0.18)_72%)] text-[1.04em] text-[#E85A2A]">合計1,687万再生</span>
               </h1>
               <p className="mt-7 max-w-[700px] text-[17px] font-bold leading-[1.75] tracking-[-0.025em] text-[#151515] sm:text-[21px]">使っているAIも制作手順もすべて公開。設定・プロンプト・操作画面まで、実際に使っている内容をそのまままとめました。</p>
               <p className="mt-7 max-w-[680px] text-[15px] font-normal leading-[1.9] text-[#6B6862] sm:text-[17px]">LINEで無料ガイドを受け取れば、普段投稿しているリールとほぼ同じ制作手順でAI動画を自分で作れます。</p>
