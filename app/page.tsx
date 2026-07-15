@@ -21,25 +21,25 @@ const concerns = [
 const guideBenefits = [
   {
     title: "解説動画",
-    text: "実際の制作手順を 操作画面を見ながら順番に確認できます。",
+    text: "操作画面を見ながら、実際の制作手順を順番に確認できます。",
     tone: "bg-white",
     icon: "play" as const,
   },
   {
     title: "使用AIツール一覧",
-    text: "実際に使用しているAIと 必要な設定をまとめています。",
+    text: "実際に使用しているAIと必要な設定をまとめています。",
     tone: "bg-white",
     icon: "tools" as const,
   },
   {
     title: "コピペ用プロンプト集",
-    text: "動画内で使用しているプロンプトを そのまま使える形で受け取れます。",
+    text: "動画内で使用しているプロンプトを、そのまま使える形で受け取れます。",
     tone: "bg-white",
     icon: "copy" as const,
   },
   {
     title: "制作順チェックリスト",
-    text: "動画を見たあとに迷わないよう 作業の順番を一覧で確認できます。",
+    text: "動画を見たあとに迷わないよう、作業の順番を一覧で確認できます。",
     tone: "bg-white",
     icon: "check" as const,
   },
@@ -174,7 +174,7 @@ export default function Home() {
               <p className="inline-flex rounded-full border border-[#28345C]/15 bg-white/85 px-4 py-2 text-[13px] font-bold text-[#28345C] sm:text-sm">
                 顔出しなし・撮影なし・専門スキルなし
               </p>
-              <h1 className="mt-5 text-[clamp(2rem,8.8vw,3.75rem)] font-black leading-[1.16] tracking-[-0.05em] text-[#151515] lg:text-[clamp(2.25rem,3.4vw,3rem)]">
+              <h1 className="mt-5 text-[clamp(1.625rem,8.25vw,3.75rem)] font-black leading-[1.16] tracking-[-0.05em] text-[#151515] lg:text-[clamp(2.25rem,3.4vw,3rem)]">
                 <span className="block whitespace-nowrap">AIを使って作った</span>
                 <span className="block whitespace-nowrap">Instagramリールが</span>
                 <span className="mt-1 block lg:flex lg:items-baseline lg:gap-[0.18em] lg:whitespace-nowrap">
@@ -182,16 +182,8 @@ export default function Home() {
                   <span className="block w-fit whitespace-nowrap text-[#28345C]">合計1,687万再生</span>
                 </span>
               </h1>
-              <div className="mt-7 grid gap-0 text-[17px] font-bold leading-[1.55] tracking-[-0.025em] text-[#151515] sm:text-[21px]">
-                <span className="block">使っているAIも制作手順もすべて公開</span>
-                <span className="block">設定・プロンプト・操作画面まで</span>
-                <span className="block">実際に使っている内容をそのまままとめました</span>
-              </div>
-              <div className="mt-8 grid max-w-[680px] gap-0 text-[15px] font-normal leading-[1.85] text-[#6B6862] sm:text-[17px]">
-                <span className="block">LINEで無料ガイドを受け取れば</span>
-                <span className="block">実際に投稿しているリールとほぼ同じ流れで</span>
-                <span className="block">AI動画を自分で作れます</span>
-              </div>
+              <p className="mt-7 max-w-[700px] text-[17px] font-bold leading-[1.75] tracking-[-0.025em] text-[#151515] sm:text-[21px]">使っているAIも制作手順もすべて公開。設定・プロンプト・操作画面まで、実際に使っている内容をそのまままとめました。</p>
+              <p className="mt-7 max-w-[680px] text-[15px] font-normal leading-[1.9] text-[#6B6862] sm:text-[17px]">LINEで無料ガイドを受け取れば、普段投稿しているリールとほぼ同じ制作手順でAI動画を自分で作れます。</p>
 
               <div className="mt-7 max-w-[560px]">
                 <LineCta href={lineUrl} location="hero" />
@@ -247,7 +239,6 @@ export default function Home() {
                   alt="2026年5月10日から6月10日のInstagramインサイト元画像"
                   width={1206}
                   height={1711}
-                  loading="eager"
                   className="h-auto w-full rounded-[20px] object-contain"
                   sizes="(max-width: 768px) 92vw, 470px"
                 />
@@ -299,7 +290,7 @@ export default function Home() {
             <div className="mt-8 max-w-[780px] space-y-5 text-base leading-[1.9] text-[#6B6862] sm:text-[18px]">
               <p>私自身、最初はどのAIを選べばいいのか分からず、必要のないプランを契約したり、設定が分からないまま何度も生成をやり直したりしました。情報を探しても断片的なものが多く、実際に動画を作るまでの流れを理解するのに時間も費用もかかりました。</p>
               <p>これから始める人には、同じところで迷ってほしくありません。そこで、実際に使っているAI・設定・プロンプト・操作画面・制作手順をひとつにまとめました。何を使い、どの順番で進めればいいのかを最初から確認できる内容にしています。</p>
-              <p>無料で公開する理由は、知識だけを受け取って終わるのではなく、実際に最初の1本を作れるところまで進んでもらいたいからです。</p>
+              <p>無料で公開するのは、ガイドを読んで終わるのではなく、最初の1本を実際に作るところまで進んでもらいたいからです。</p>
             </div>
           </Container>
         </section>
@@ -310,9 +301,13 @@ export default function Home() {
             <p className="mt-7 text-base leading-[1.95] text-[#6B6862] sm:text-[18px]">
               登録後7日以内に作る最初の動画1本について、画像生成、AIの設定、プロンプト、生成結果、制作中に起きた問題をLINEで相談できます。
             </p>
-            <p className="mt-6 border-l-[3px] border-[#28345C] pl-5 text-lg font-black leading-[1.8] text-[#151515] sm:text-xl">
-              ガイドを読むだけで終わらず 最初の1本を完成させるためのサポートです
-            </p>
+            <ul className="mt-6 grid gap-3 text-sm font-bold leading-6 text-[#151515] sm:grid-cols-3 sm:text-[15px]">
+              {["画像や生成結果の確認", "AI設定やプロンプトの質問", "制作中に起きた問題の相談"].map((item) => (
+                <li key={item} className="flex items-center gap-2 border-b border-black/10 pb-3 sm:border-b-0 sm:border-l sm:border-black/10 sm:pb-0 sm:pl-4">
+                  <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-[#28345C]" />{item}
+                </li>
+              ))}
+            </ul>
             <p className="mt-6 text-sm leading-7 text-[#6B6862] sm:text-[15px]">※サポート対象は登録後7日以内に作る最初の1本です。動画の制作代行ではありません。</p>
             <p className="mt-6 rounded-r-[16px] border-l-[3px] border-[#28345C]/55 bg-[#EEF0F6] px-5 py-4 text-sm leading-7 text-[#5E6270] sm:text-[15px]">
               ※7日間サポートは、対応可能人数に達した場合は受付を終了します。
