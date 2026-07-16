@@ -151,7 +151,7 @@ export default function GuidePage() {
               </article>
 
               <article className="flex flex-col rounded-[18px] border border-[#E5E7EB] bg-white p-6 shadow-sm sm:p-7">
-                <h3 className="text-[22px] font-black tracking-[-0.02em] text-[#111111]">
+                <h3 className="flex items-center gap-2 text-[22px] font-black tracking-[-0.02em] text-[#111111]">
                   <a
                     href="https://motivaiprivatelimited.sjv.io/ZVmLnk"
                     target="_blank"
@@ -163,6 +163,9 @@ export default function GuidePage() {
                       ↗
                     </span>
                   </a>
+                  <span className="inline-flex shrink-0 items-center rounded border border-[#9CA3AF] bg-[#F3F4F6] px-2 py-0.5 text-xs font-bold leading-5 tracking-normal text-[#4B5563]">
+                    PR
+                  </span>
                 </h3>
                 <p className="mt-3 flex-1 text-sm leading-[1.85] text-[#666666] sm:text-base">
                   作成した画像を動画化し、人物のポーズ変更やトランジションを作るために使用します。
@@ -176,9 +179,6 @@ export default function GuidePage() {
                   PixVerseを開く
                   <span aria-hidden="true" className="ml-2 text-xs">↗</span>
                 </a>
-                <p className="mt-4 border-t border-[#E5E7EB] pt-4 text-[11px] leading-[1.75] text-[#6B7280] sm:text-xs">
-                  ※PixVerseのリンクはアフィリエイトリンクです。リンク経由で申込みが発生した場合、運営者に報酬が入ることがあります。
-                </p>
               </article>
             </div>
           </Container>
