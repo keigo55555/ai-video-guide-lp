@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Container from "@/components/Container";
 import PromptCard from "@/components/PromptCard";
+import TrackedExternalLink from "@/components/TrackedExternalLink";
 
 export const metadata: Metadata = {
   title: "AI動画 完全版無料ガイド",
@@ -102,7 +103,7 @@ export default function GuidePage() {
               <div className="aspect-video">
                 <iframe
                   className="h-full w-full"
-                  src="https://www.youtube-nocookie.com/embed/6Ll41OdSJwg?rel=0"
+                  src="https://www.youtube-nocookie.com/embed/6Ll41OdSJwg?rel=0&enablejsapi=1"
                   title="AI動画 完全版無料ガイド"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
@@ -124,8 +125,10 @@ export default function GuidePage() {
             <div className="mt-9 grid gap-5 sm:mt-12 md:grid-cols-2 md:gap-6">
               <article className="flex flex-col rounded-[18px] border border-[#E5E7EB] bg-white p-6 shadow-sm sm:p-7">
                 <h3 className="text-[22px] font-black tracking-[-0.02em] text-[#111111]">
-                  <a
+                  <TrackedExternalLink
                     href="https://chatgpt.com/"
+                    eventName="tool_link_click"
+                    eventParams={{ tool_name: "ChatGPT", link_position: "title" }}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2 rounded-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#9CA3AF]/35"
@@ -134,26 +137,30 @@ export default function GuidePage() {
                     <span aria-hidden="true" className="text-sm font-bold text-[#6B7280] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
                       ↗
                     </span>
-                  </a>
+                  </TrackedExternalLink>
                 </h3>
                 <p className="mt-3 flex-1 text-sm leading-[1.85] text-[#666666] sm:text-base">
                   人物画像の生成や、背景・構図を変更した画像の作成に使用します。
                 </p>
-                <a
+                <TrackedExternalLink
                   href="https://chatgpt.com/"
+                  eventName="tool_link_click"
+                  eventParams={{ tool_name: "ChatGPT", link_position: "button" }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex min-h-12 items-center justify-center rounded-lg bg-[#111827] px-5 py-3 text-sm font-black text-white transition-colors hover:bg-[#374151] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#9CA3AF]/35"
                 >
                   ChatGPTを開く
                   <span aria-hidden="true" className="ml-2 text-xs">↗</span>
-                </a>
+                </TrackedExternalLink>
               </article>
 
               <article className="flex flex-col rounded-[18px] border border-[#E5E7EB] bg-white p-6 shadow-sm sm:p-7">
                 <h3 className="flex items-center gap-2 text-[22px] font-black tracking-[-0.02em] text-[#111111]">
-                  <a
+                  <TrackedExternalLink
                     href="https://motivaiprivatelimited.sjv.io/ZVmLnk"
+                    eventName="tool_link_click"
+                    eventParams={{ tool_name: "PixVerse", link_position: "title" }}
                     target="_blank"
                     rel="sponsored noopener noreferrer"
                     className="group inline-flex items-center gap-2 rounded-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#9CA3AF]/35"
@@ -162,7 +169,7 @@ export default function GuidePage() {
                     <span aria-hidden="true" className="text-sm font-bold text-[#6B7280] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
                       ↗
                     </span>
-                  </a>
+                  </TrackedExternalLink>
                   <span className="inline-flex shrink-0 items-center rounded border border-[#9CA3AF] bg-[#F3F4F6] px-2 py-0.5 text-xs font-bold leading-5 tracking-normal text-[#4B5563]">
                     PR
                   </span>
@@ -170,15 +177,17 @@ export default function GuidePage() {
                 <p className="mt-3 flex-1 text-sm leading-[1.85] text-[#666666] sm:text-base">
                   作成した画像を動画化し、人物のポーズ変更やトランジションを作るために使用します。
                 </p>
-                <a
+                <TrackedExternalLink
                   href="https://motivaiprivatelimited.sjv.io/ZVmLnk"
+                  eventName="tool_link_click"
+                  eventParams={{ tool_name: "PixVerse", link_position: "button" }}
                   target="_blank"
                   rel="sponsored noopener noreferrer"
                   className="mt-6 inline-flex min-h-12 items-center justify-center rounded-lg bg-[#111827] px-5 py-3 text-sm font-black text-white transition-colors hover:bg-[#374151] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#9CA3AF]/35"
                 >
                   PixVerseを開く
                   <span aria-hidden="true" className="ml-2 text-xs">↗</span>
-                </a>
+                </TrackedExternalLink>
               </article>
             </div>
           </Container>

@@ -1,3 +1,7 @@
+"use client";
+
+import { sendGAEvent } from "@next/third-parties/google";
+
 type CtaLocation = "header" | "hero" | "guide" | "final";
 
 type LineCtaProps = {
@@ -27,6 +31,12 @@ export default function LineCta({ href, location, compact = false }: LineCtaProp
   return (
     <a
       href={href}
+      onClick={() =>
+        sendGAEvent("event", "line_cta_click", {
+          cta_location: location,
+          link_url: href,
+        })
+      }
       data-cta="line-registration"
       data-cta-location={location}
       aria-label={`${label}（LINE公式アカウントへ移動）`}

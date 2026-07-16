@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 
 type PromptCardProps = {
   step: number;
@@ -36,6 +37,10 @@ export default function PromptCard({
 
       await navigator.clipboard.writeText(prompt);
       setCopyStatus("copied");
+      sendGAEvent("event", "prompt_copy", {
+        prompt_step: step,
+        prompt_name: title,
+      });
     } catch {
       setCopyStatus("error");
     }

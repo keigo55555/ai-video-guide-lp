@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
+const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim();
 const siteUrl = "https://ai-video-guide-lp.vercel.app";
 const title = "顔出しなしのInstagramリールで1か月1,687万再生｜AI動画無料ガイド";
 const description = "AIを使って作ったInstagramリールが2026年5月10日〜6月10日の1か月で合計16,873,128再生。実際に使っているAI・設定・プロンプト・操作画面・制作手順を無料公開します。";
@@ -39,6 +41,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="preload" as="image" href="/assets/hero-poster.webp" type="image/webp" />
       </head>
       <body>{children}</body>
+      {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
   );
 }
