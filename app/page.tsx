@@ -61,8 +61,8 @@ const faqs = [
     answer: "初めての人が順番に進められるように、操作画面、設定、入力する文章まで具体的に説明します。",
   },
   {
-    question: "スマホだけでもできますか？",
-    answer: "一部の作業はスマホだけでも進められますが、画像や動画素材の管理はPCを使った方がスムーズです。",
+    question: "スマホだけでも作れますか？",
+    answer: "はい、スマホだけでも作れます。画像の作成、動画化、編集までスマホで進められるため、最初の1本はスマホだけでも完成できます。素材の管理や細かな編集は、PCを使うとよりスムーズです。",
   },
   {
     question: "同じ再生数を出せますか？",
@@ -188,11 +188,8 @@ export default function Home() {
 
               <div className="mt-7 max-w-[560px]">
                 <LineCta href={lineUrl} location="hero" />
-                <p className="mt-3 text-center text-sm font-bold text-[#35332F]">登録後すぐに完全版ガイドを受け取れます</p>
-                <div className="mt-3 flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs leading-6 text-[#6B6862] sm:text-[13px]">
-                  <span className="font-bold text-[#28345C]">7日間サポート付き</span>
-                  <span>ガイドは無料です</span>
-                </div>
+                <p className="mt-3 text-center text-sm font-bold leading-6 text-[#35332F]">友だち追加後すぐに、作り方動画とコピペ用プロンプトが届きます</p>
+                <p className="mt-2 text-center text-xs leading-6 text-[#6B6862] sm:text-[13px]">スマホだけでもOK｜顔出し・撮影なし｜7日間サポート付き</p>
                 <p className="mt-2 text-center text-[11px] leading-5 text-[#6B6862] sm:text-xs">※同じ再生数や成果を保証するものではありません。</p>
               </div>
             </div>
@@ -297,7 +294,8 @@ export default function Home() {
             </div>
             <div className="mx-auto mt-10 max-w-[560px]">
               <LineCta href={lineUrl} location="guide" />
-              <p className="mt-4 text-center text-xs leading-6 text-[#6B6862] sm:text-sm">解説動画・使用AIツール一覧・プロンプト集・制作順チェックリストはすべて無料です。</p>
+              <p className="mt-3 text-center text-sm font-bold leading-6 text-[#35332F]">友だち追加後すぐに、作り方動画とコピペ用プロンプトが届きます</p>
+              <p className="mt-2 text-center text-xs leading-6 text-[#6B6862] sm:text-[13px]">スマホだけでもOK｜顔出し・撮影なし｜7日間サポート付き</p>
             </div>
           </Container>
         </section>
@@ -364,11 +362,8 @@ export default function Home() {
             </p>
             <div className="mx-auto mt-9 max-w-[560px]">
               <LineCta href={lineUrl} location="final" />
-              <p className="mt-4 text-sm font-bold text-white/85">登録後すぐに完全版ガイドを受け取れます</p>
-              <div className="mt-2 flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs leading-6 text-white/65 sm:text-[13px]">
-                <span>7日間サポート付き</span>
-                <span>ガイドは無料です</span>
-              </div>
+              <p className="mt-3 text-sm font-bold leading-6 text-white/85">友だち追加後すぐに、作り方動画とコピペ用プロンプトが届きます</p>
+              <p className="mt-2 text-xs leading-6 text-white/65 sm:text-[13px]">スマホだけでもOK｜顔出し・撮影なし｜7日間サポート付き</p>
               <p className="mt-2 text-[11px] leading-5 text-white/55 sm:text-xs">※同じ再生数や成果を保証するものではありません。</p>
             </div>
           </Container>
